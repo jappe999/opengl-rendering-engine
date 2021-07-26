@@ -73,5 +73,5 @@ void Application::start()
 
   glfwTerminate();
 
-  onDestroy();
+  destroy();
 }
