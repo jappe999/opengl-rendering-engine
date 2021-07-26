@@ -1,6 +1,6 @@
 # OpenGL rendering engine
 
-A simple rendering engine using OpenGL and C++.
+A simple rendering engine built with C++ and OpenGL.
 
 # Building
 
