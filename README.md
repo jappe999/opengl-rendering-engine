@@ -2,6 +2,12 @@
 
 A simple rendering engine built with C++ and OpenGL.
 
+---
+
+## Background information
+
+Read more on the technical details in the [documentation folder](.github/docs/README.md)
+
 ## Installing dependencies
 
 You'll need to build Vcpkg (which is included as submodule) by executing the command below.
