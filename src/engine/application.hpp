@@ -11,10 +11,7 @@ public:
   string title = "OpenGL Rendering Engine";
 
   Application(){};
-  ~Application()
-  {
-    onDestroy();
-  };
+  ~Application(){};
 
   virtual void onStart() {}
   virtual void onDestroy() {}
