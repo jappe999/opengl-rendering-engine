@@ -2,6 +2,7 @@
 #include <libs/glad/glad.h>
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
+#include <engine/renderer.hpp>
 
 using namespace std;
 
@@ -22,6 +23,7 @@ public:
 
 private:
   GLFWwindow *window;
+  Renderer *renderer;
 
   bool initializeWindow(int32_t width, int32_t height, bool fullScreen = false);
 };

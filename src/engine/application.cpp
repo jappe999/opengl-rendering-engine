@@ -12,13 +12,15 @@ bool Application::create(int32_t width, int32_t height, bool fullScreen)
   glEnable(GL_MULTISAMPLE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-  const GLubyte *renderer = glGetString(GL_RENDERER); // get renderer string
-  const GLubyte *version = glGetString(GL_VERSION);   // version as a string
-  const GLubyte *shader = glGetString(GL_SHADING_LANGUAGE_VERSION);
+  const GLubyte *glRenderer = glGetString(GL_RENDERER); // get renderer string
+  const GLubyte *glVersion = glGetString(GL_VERSION);   // version as a string
+  const GLubyte *glShader = glGetString(GL_SHADING_LANGUAGE_VERSION);
 
-  printf("Renderer: %s\n", renderer);
-  printf("OpenGL version supported %s\n", version);
-  printf("Shader supported %s\n", shader);
+  printf("Renderer: %s\n", glRenderer);
+  printf("OpenGL version supported %s\n", glVersion);
+  printf("Shader supported %s\n", glShader);
+
+  renderer = Renderer::getInstance();
 
   return true;
 }
@@ -67,6 +69,8 @@ void Application::start()
 
     glClearColor(0.0, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    renderer->render();
 
     glfwSwapBuffers(window);
   }
