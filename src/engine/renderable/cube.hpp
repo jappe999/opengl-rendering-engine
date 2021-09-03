@@ -2,7 +2,7 @@
 #include <libs/glad/glad.h>
 #include <engine/renderable/renderable.hpp>
 
-class Triangle : public Renderable
+class Cube : public Renderable
 {
 public:
   void bind()

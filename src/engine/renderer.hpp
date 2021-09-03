@@ -25,6 +25,8 @@ public:
   void render();
   mat4 getProjectionMatrix();
 
+  void addObject(Renderable *object);
+
   void setAspectRatio(float ratio);
   float getAspectRatio();
 
@@ -32,5 +34,5 @@ private:
   vector<Renderable *> objects;
   float aspect;
 
-  Renderer();
+  Renderer() {}
 };

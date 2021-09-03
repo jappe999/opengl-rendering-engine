@@ -1,14 +1,10 @@
 #include <iostream>
 #include <engine/renderer.hpp>
-#include <engine/renderable/triangle.hpp>
 #include <engine/shader.hpp>
 
-Renderer::Renderer()
+void Renderer::addObject(Renderable *object)
 {
-  Triangle *triangle = new Triangle();
-  triangle->useShader(Shader::acquire("base"));
-  triangle->bind();
-  objects.push_back(triangle);
+  objects.push_back(object);
 }
 
 void Renderer::render()

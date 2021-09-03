@@ -21,7 +21,7 @@ public:
   void start();
   void destroy();
 
-private:
+protected:
   int32_t width, height;
 
   GLFWwindow *window;
