@@ -22,6 +22,8 @@ public:
   void destroy();
 
 private:
+  int32_t width, height;
+
   GLFWwindow *window;
   Renderer *renderer;
 

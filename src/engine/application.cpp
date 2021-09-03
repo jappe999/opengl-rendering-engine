@@ -21,6 +21,7 @@ bool Application::create(int32_t width, int32_t height, bool fullScreen)
   printf("Shader supported %s\n", glShader);
 
   renderer = Renderer::getInstance();
+  renderer->setAspectRatio(float(width) / height);
 
   return true;
 }
@@ -67,7 +68,7 @@ void Application::start()
     /* Poll for and process events */
     glfwPollEvents();
 
-    glClearColor(0.0, 0.0, 0.0, 1.0);
+    glClearColor(0, 0, 0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     renderer->render();
