@@ -64,9 +64,9 @@ public:
     glEnableVertexAttribArray(0);
   }
 
-  void render(const mat4 view)
+  void render(Camera *camera)
   {
-    Renderable::render(view);
+    Renderable::render(camera);
 
     glBindVertexArray(vao);
     glDrawArrays(GL_TRIANGLES, 0, 36);

@@ -16,12 +16,15 @@ void Renderable::bind()
   uniform_proj = glGetUniformLocation(shader->id, "projection");
 }
 
-void Renderable::render(const mat4 view)
+void Renderable::render(Camera *camera)
 {
   // Attach to program_id
   shader->use();
 
+  const mat4 view = camera->getViewMatrix();
+  const mat4 projection = camera->getProjectionMatrix();
+
   // glUniformMatrix4fv(uniform_model, 1, GL_FALSE, value_ptr(model));
   glUniformMatrix4fv(uniform_view, 1, GL_FALSE, value_ptr(view));
-  glUniformMatrix4fv(uniform_proj, 1, GL_FALSE, value_ptr(Renderer::getInstance()->getProjectionMatrix()));
+  glUniformMatrix4fv(uniform_proj, 1, GL_FALSE, value_ptr(projection));
 }

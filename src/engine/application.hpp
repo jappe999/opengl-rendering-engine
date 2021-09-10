@@ -26,6 +26,10 @@ protected:
 
   GLFWwindow *window;
   Renderer *renderer;
+  Camera *camera;
 
+private:
   bool initializeWindow(int32_t width, int32_t height, bool fullScreen = false);
+
+  bool hasStarted = false;
 };
