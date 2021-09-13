@@ -20,7 +20,7 @@ bool Application::create(int32_t width, int32_t height, bool fullScreen)
   printf("OpenGL version supported %s\n", glVersion);
   printf("Shader supported %s\n", glShader);
 
-  camera = new Camera();
+  camera = std::unique_ptr<Camera>(new Camera());
   camera->setAspectRatio(float(width) / height);
   renderer = std::unique_ptr<Renderer>(new Renderer());
 

@@ -64,7 +64,7 @@ public:
     glEnableVertexAttribArray(0);
   }
 
-  void render(Camera *camera)
+  void render(std::unique_ptr<Camera> &camera)
   {
     Renderable::render(camera);
 

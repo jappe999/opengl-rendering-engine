@@ -12,7 +12,7 @@ public:
   Renderer();
   ~Renderer();
 
-  void render(Camera *camera);
+  void render(std::unique_ptr<Camera> &camera);
 
   void addObject(std::unique_ptr<Renderable> &object);
 

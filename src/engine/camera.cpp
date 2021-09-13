@@ -39,7 +39,6 @@ void Camera::updateVectors()
 
 const mat4 Camera::getViewMatrix()
 {
-  updateVectors();
   return lookAt(position, position + targetFront, targetUp);
 }
 

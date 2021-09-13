@@ -25,7 +25,7 @@ protected:
 
   GLFWwindow *window;
   std::unique_ptr<Renderer> renderer;
-  Camera *camera;
+  std::unique_ptr<Camera> camera;
 
 private:
   bool initializeWindow(int32_t width, int32_t height, bool fullScreen = false);

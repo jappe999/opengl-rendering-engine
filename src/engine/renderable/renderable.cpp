@@ -16,7 +16,7 @@ void Renderable::bind()
   uniform_proj = glGetUniformLocation(shader->id, "projection");
 }
 
-void Renderable::render(Camera *camera)
+void Renderable::render(std::unique_ptr<Camera> &camera)
 {
   // Attach to program_id
   shader->use();
