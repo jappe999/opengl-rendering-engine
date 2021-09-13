@@ -2,17 +2,22 @@
 #include <engine/renderer.hpp>
 #include <engine/shader.hpp>
 
-Renderer::Renderer()
+void Renderer::addObject(std::unique_ptr<Renderable> &object)
 {
-}
-
-void Renderer::addObject(Renderable *object)
-{
-  objects.push_back(object);
+  objects.emplace_back(std::move(object));
 }
 
 void Renderer::render(Camera *camera)
 {
-  for (auto object : objects)
+  for (auto &object : objects)
     object->render(camera);
+}
+
+Renderer::Renderer()
+{
+}
+
+Renderer::~Renderer()
+{
+  objects.clear();
 }

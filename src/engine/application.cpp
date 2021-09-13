@@ -22,7 +22,7 @@ bool Application::create(int32_t width, int32_t height, bool fullScreen)
 
   camera = new Camera();
   camera->setAspectRatio(float(width) / height);
-  renderer = Renderer::getInstance();
+  renderer = std::unique_ptr<Renderer>(new Renderer());
 
   return true;
 }
@@ -86,6 +86,4 @@ void Application::start()
   destroy();
 
   glfwTerminate();
-
-  delete renderer;
 }

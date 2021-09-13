@@ -1,15 +1,14 @@
+#include <memory>
 #include <iostream>
 #include <engine/application.hpp>
 #include <engine/renderable/cube.hpp>
-
-using namespace std;
 
 class MyApp : public Application
 {
 public:
   void onStart() override
   {
-    Cube *cube = new Cube();
+    auto cube = std::unique_ptr<Renderable>(new Cube());
     cube->useShader(Shader::acquire("base"));
     cube->bind();
     renderer->addObject(cube);
