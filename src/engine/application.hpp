@@ -1,9 +1,9 @@
+#include <memory>
 #include <string>
 #include <libs/glad/glad.h>
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
-
-using namespace std;
+#include <engine/renderer.hpp>
 
 class Application
 {
@@ -20,8 +20,11 @@ public:
   void start();
   void destroy();
 
-private:
+protected:
+  int32_t width, height;
+
   GLFWwindow *window;
+  std::unique_ptr<Renderer> renderer;
 
   bool initializeWindow(int32_t width, int32_t height, bool fullScreen = false);
 };
