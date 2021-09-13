@@ -2,9 +2,9 @@
 #include <engine/renderer.hpp>
 #include <engine/shader.hpp>
 
-void Renderer::addObject(Renderable *object)
+void Renderer::addObject(std::unique_ptr<Renderable> &object)
 {
-  objects.push_back(object);
+  objects.emplace_back(std::move(object));
 }
 
 void Renderer::render()
@@ -15,7 +15,7 @@ void Renderer::render()
 
   const mat4 view = lookAt(cameraPosition, cameraPosition + cameraFront, cameraUp);
 
-  for (auto object : objects)
+  for (auto &object : objects)
     object->render(view);
 }
 
@@ -32,4 +32,13 @@ float Renderer::getAspectRatio()
 mat4 Renderer::getProjectionMatrix()
 {
   return perspective(radians(45.0f), aspect, 0.01f, 200.0f);
+}
+
+Renderer::Renderer()
+{
+}
+
+Renderer::~Renderer()
+{
+  objects.clear();
 }

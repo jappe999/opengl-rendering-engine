@@ -1,38 +1,25 @@
 #pragma once
 
+#include <memory>
 #include <vector>
 #include <glm/gtc/matrix_transform.hpp>
 #include <engine/renderable/renderable.hpp>
 
-using namespace std;
-
 class Renderer
 {
 public:
-  Renderer(Renderer const &) = delete;
-  void operator=(Renderer const &) = delete;
-
-  static Renderer *getInstance()
-  {
-    static Renderer *instance;
-
-    if (instance == nullptr)
-      instance = new Renderer();
-
-    return instance;
-  }
+  Renderer();
+  ~Renderer();
 
   void render();
   mat4 getProjectionMatrix();
 
-  void addObject(Renderable *object);
+  void addObject(std::unique_ptr<Renderable> &object);
 
   void setAspectRatio(float ratio);
   float getAspectRatio();
 
 private:
-  vector<Renderable *> objects;
+  std::vector<std::unique_ptr<Renderable>> objects;
   float aspect;
-
-  Renderer() {}
 };

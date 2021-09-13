@@ -23,5 +23,5 @@ void Renderable::render(const mat4 view)
 
   // glUniformMatrix4fv(uniform_model, 1, GL_FALSE, value_ptr(model));
   glUniformMatrix4fv(uniform_view, 1, GL_FALSE, value_ptr(view));
-  glUniformMatrix4fv(uniform_proj, 1, GL_FALSE, value_ptr(Renderer::getInstance()->getProjectionMatrix()));
+  glUniformMatrix4fv(uniform_proj, 1, GL_FALSE, value_ptr((new Renderer())->getProjectionMatrix()));
 }
