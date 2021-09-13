@@ -20,8 +20,9 @@ bool Application::create(int32_t width, int32_t height, bool fullScreen)
   printf("OpenGL version supported %s\n", glVersion);
   printf("Shader supported %s\n", glShader);
 
+  camera = std::unique_ptr<Camera>(new Camera());
+  camera->setAspectRatio(float(width) / height);
   renderer = std::unique_ptr<Renderer>(new Renderer());
-  renderer->setAspectRatio(float(width) / height);
 
   return true;
 }
@@ -58,6 +59,12 @@ bool Application::initializeWindow(int32_t width, int32_t height, bool fullScree
 
 void Application::start()
 {
+  // User should not be able to start the application a second time.
+  if (hasStarted)
+    return;
+
+  hasStarted = true;
+
   onStart();
 
   glfwSwapInterval(1);
@@ -71,12 +78,12 @@ void Application::start()
     glClearColor(0, 0, 0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    renderer->render();
+    renderer->render(camera);
 
     glfwSwapBuffers(window);
   }
 
-  glfwTerminate();
-
   destroy();
+
+  glfwTerminate();
 }

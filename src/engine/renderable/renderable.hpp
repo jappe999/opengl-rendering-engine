@@ -1,8 +1,10 @@
 #pragma once
 
+#include <memory>
 #include <glm/gtc/matrix_transform.hpp>
 #include <libs/glad/glad.h>
 #include <engine/shader.hpp>
+#include <engine/camera.hpp>
 
 using namespace glm;
 
@@ -15,7 +17,7 @@ public:
   virtual void useShader(Shader *shader);
 
   virtual void bind();
-  virtual void render(const mat4 view);
+  virtual void render(std::unique_ptr<Camera> &camera);
 
 protected:
   GLuint vao;
