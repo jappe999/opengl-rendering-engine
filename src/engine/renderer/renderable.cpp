@@ -1,5 +1,4 @@
-#include <engine/renderable/renderable.hpp>
-#include <engine/renderer.hpp>
+#include <engine/renderer/renderable.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 void Renderable::useShader(Shader *shader)

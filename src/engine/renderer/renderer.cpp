@@ -1,6 +1,6 @@
 #include <iostream>
-#include <engine/renderer.hpp>
-#include <engine/shader.hpp>
+#include <engine/renderer/renderer.hpp>
+#include <engine/renderer/shader.hpp>
 
 void Renderer::addObject(std::unique_ptr<Renderable> &object)
 {
