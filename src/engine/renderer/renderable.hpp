@@ -3,8 +3,8 @@
 #include <memory>
 #include <glm/gtc/matrix_transform.hpp>
 #include <libs/glad/glad.h>
-#include <engine/shader.hpp>
-#include <engine/camera.hpp>
+#include <engine/renderer/shader.hpp>
+#include <engine/renderer/camera.hpp>
 
 using namespace glm;
 

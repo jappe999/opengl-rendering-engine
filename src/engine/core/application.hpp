@@ -3,7 +3,7 @@
 #include <libs/glad/glad.h>
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
-#include <engine/renderer.hpp>
+#include <engine/renderer/renderer.hpp>
 
 class Application
 {
@@ -22,6 +22,7 @@ public:
 
 protected:
   int32_t width, height;
+  bool fullScreen;
 
   GLFWwindow *window;
   std::unique_ptr<Renderer> renderer;

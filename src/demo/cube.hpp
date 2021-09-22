@@ -1,6 +1,6 @@
 
 #include <libs/glad/glad.h>
-#include <engine/renderable/renderable.hpp>
+#include <engine/renderer/renderable.hpp>
 
 class Cube : public Renderable
 {

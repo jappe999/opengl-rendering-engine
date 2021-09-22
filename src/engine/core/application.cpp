@@ -1,8 +1,12 @@
 #include <iostream>
-#include <engine/application.hpp>
+#include <engine/core/application.hpp>
 
 bool Application::create(int32_t width, int32_t height, bool fullScreen)
 {
+  this->width = width;
+  this->height = height;
+  this->fullScreen = fullScreen;
+
   if (!initializeWindow(width, height, fullScreen))
     return false;
 

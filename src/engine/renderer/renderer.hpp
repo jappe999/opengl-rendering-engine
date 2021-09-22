@@ -3,8 +3,8 @@
 #include <memory>
 #include <vector>
 #include <glm/gtc/matrix_transform.hpp>
-#include <engine/renderable/renderable.hpp>
-#include <engine/camera.hpp>
+#include <engine/renderer/renderable.hpp>
+#include <engine/renderer/camera.hpp>
 
 class Renderer
 {

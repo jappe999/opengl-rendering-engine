@@ -1,7 +1,7 @@
 #include <memory>
 #include <iostream>
-#include <engine/application.hpp>
-#include <engine/renderable/cube.hpp>
+#include <engine/core/application.hpp>
+#include "cube.hpp"
 
 class MyApp : public Application
 {

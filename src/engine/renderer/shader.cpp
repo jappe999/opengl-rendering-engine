@@ -1,5 +1,5 @@
-#include <engine/shader.hpp>
-#include <engine/filesystem.hpp>
+#include <engine/renderer/shader.hpp>
+#include <engine/utils/filesystem.hpp>
 
 map<string, Shader *> Shader::shaders;
 
