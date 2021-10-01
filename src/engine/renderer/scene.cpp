@@ -1,28 +1,28 @@
 #include <iostream>
-#include <engine/renderer/renderer.hpp>
+#include <engine/renderer/scene.hpp>
 #include <engine/renderer/shader.hpp>
 
-void Renderer::addObject(Renderable *object)
+void Scene::addObject(Renderable *object)
 {
   objects.emplace_back(std::move(object));
 }
 
-std::vector<Renderable *> Renderer::getObjects() const
+std::vector<Renderable *> Scene::getObjects() const
 {
   return objects;
 }
 
-void Renderer::render(Camera *camera)
+void Scene::render(Camera *camera)
 {
   for (auto &object : objects)
     object->render(camera);
 }
 
-Renderer::Renderer()
+Scene::Scene()
 {
 }
 
-Renderer::~Renderer()
+Scene::~Scene()
 {
   objects.clear();
 }

@@ -6,11 +6,11 @@
 #include <engine/renderer/renderable.hpp>
 #include <engine/renderer/camera.hpp>
 
-class Renderer
+class Scene
 {
 public:
-  Renderer();
-  ~Renderer();
+  Scene();
+  ~Scene();
 
   void render(Camera *camera);
 

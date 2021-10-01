@@ -11,7 +11,7 @@ public:
     Renderable *cube = new Cube();
     cube->useShader(Shader::acquire("base"));
     cube->bind();
-    renderer->addObject(cube);
+    scene->addObject(cube);
   }
 
   void onDestroy() override
