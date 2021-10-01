@@ -5,6 +5,7 @@
 #include <libs/glad/glad.h>
 #include <engine/renderer/shader.hpp>
 #include <engine/renderer/camera.hpp>
+#include <engine/events/event.hpp>
 
 using namespace glm;
 
@@ -17,7 +18,10 @@ public:
   virtual void useShader(Shader *shader);
 
   virtual void bind();
-  virtual void render(std::unique_ptr<Camera> &camera);
+  virtual void render(Camera *camera);
+  virtual void onEvent(Event &event);
+  virtual bool onWindowResize(WindowResizeEvent &event) { return false; }
+  virtual bool onMouseMove(MouseMoveEvent &event) { return false; }
 
 protected:
   GLuint vao;

@@ -1,9 +1,8 @@
-#include <memory>
 #include <string>
-#include <libs/glad/glad.h>
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 #include <engine/renderer/renderer.hpp>
+#include <engine/core/window.hpp>
 
 class Application
 {
@@ -24,12 +23,12 @@ protected:
   int32_t width, height;
   bool fullScreen;
 
-  GLFWwindow *window;
-  std::unique_ptr<Renderer> renderer;
-  std::unique_ptr<Camera> camera;
+  Window *window;
+  Renderer *renderer;
+  Camera *camera;
 
 private:
-  bool initializeWindow(int32_t width, int32_t height, bool fullScreen = false);
+  void onEvent(Event &event);
 
   bool hasStarted = false;
 };

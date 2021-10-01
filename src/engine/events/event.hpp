@@ -1,9 +1,14 @@
+#pragma once
+
 #include <string>
 #include <sstream>
 
+#define RE_BIND_EVENT_FN(fn) [this](auto &&...args) -> decltype(auto) { return this->fn(std::forward<decltype(args)>(args)...); }
+
 enum EventType
 {
-  WindowResize
+  WindowResize,
+  MouseMove
 };
 
 /** A convience macro for getting information about the event. */
@@ -70,4 +75,25 @@ public:
 
 private:
   int32_t width, height;
+};
+
+class MouseMoveEvent : public Event
+{
+public:
+  MouseMoveEvent(double x, double y) : X(x), Y(y) {}
+
+  double getX() { return X; }
+  double getY() { return Y; }
+
+  std::string toString() const override
+  {
+    std::stringstream ss;
+    ss << "MouseMoveEvent: " << X << ", " << Y;
+    return ss.str();
+  }
+
+  EVENT_CLASS_TYPE(MouseMove);
+
+private:
+  double X, Y;
 };

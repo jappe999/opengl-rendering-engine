@@ -12,10 +12,11 @@ public:
   Renderer();
   ~Renderer();
 
-  void render(std::unique_ptr<Camera> &camera);
+  void render(Camera *camera);
 
-  void addObject(std::unique_ptr<Renderable> &object);
+  void addObject(Renderable *object);
+  std::vector<Renderable *> getObjects() const;
 
 private:
-  std::vector<std::unique_ptr<Renderable>> objects;
+  std::vector<Renderable *> objects;
 };

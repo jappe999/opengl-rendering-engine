@@ -1,14 +1,13 @@
-#include <iostream>
 #include <engine/core/application.hpp>
 
 bool Application::create(int32_t width, int32_t height, bool fullScreen)
 {
-  this->width = width;
-  this->height = height;
-  this->fullScreen = fullScreen;
+  window = new Window(title, width, height);
 
-  if (!initializeWindow(width, height, fullScreen))
+  if (!window->createContext())
     return false;
+
+  window->setEventCallback(RE_BIND_EVENT_FN(Application::onEvent));
 
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_CULL_FACE);
@@ -24,39 +23,9 @@ bool Application::create(int32_t width, int32_t height, bool fullScreen)
   printf("OpenGL version supported %s\n", glVersion);
   printf("Shader supported %s\n", glShader);
 
-  camera = std::unique_ptr<Camera>(new Camera());
+  camera = new Camera();
   camera->setAspectRatio(float(width) / height);
-  renderer = std::unique_ptr<Renderer>(new Renderer());
-
-  return true;
-}
-
-void Application::destroy()
-{
-  onDestroy();
-}
-
-bool Application::initializeWindow(int32_t width, int32_t height, bool fullScreen)
-{
-  if (!glfwInit())
-    return false;
-
-  window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
-
-  if (!window)
-  {
-    glfwTerminate();
-    return false;
-  }
-
-  /* Make the window's context current */
-  glfwMakeContextCurrent(window);
-
-  if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-  {
-    cout << "Failed to initialize OpenGL context" << endl;
-    return false;
-  }
+  renderer = new Renderer();
 
   return true;
 }
@@ -74,7 +43,7 @@ void Application::start()
   glfwSwapInterval(1);
 
   /* Loop until the user closes the window */
-  while (!glfwWindowShouldClose(window))
+  while (!glfwWindowShouldClose(window->getNative()))
   {
     /* Poll for and process events */
     glfwPollEvents();
@@ -84,10 +53,23 @@ void Application::start()
 
     renderer->render(camera);
 
-    glfwSwapBuffers(window);
+    glfwSwapBuffers(window->getNative());
   }
 
   destroy();
 
   glfwTerminate();
+}
+
+void Application::destroy()
+{
+  onDestroy();
+}
+
+void Application::onEvent(Event &event)
+{
+  auto objects = renderer->getObjects();
+
+  for (auto &object : objects)
+    object->onEvent(event);
 }
