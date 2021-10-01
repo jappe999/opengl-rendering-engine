@@ -25,7 +25,7 @@ bool Application::create(int32_t width, int32_t height, bool fullScreen)
 
   camera = new Camera();
   camera->setAspectRatio(float(width) / height);
-  renderer = new Renderer();
+  scene = new Scene();
 
   return true;
 }
@@ -51,7 +51,7 @@ void Application::start()
     glClearColor(0, 0, 0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    renderer->render(camera);
+    scene->render(camera);
 
     glfwSwapBuffers(window->getNative());
   }
@@ -68,7 +68,7 @@ void Application::destroy()
 
 void Application::onEvent(Event &event)
 {
-  auto objects = renderer->getObjects();
+  auto objects = scene->getObjects();
 
   for (auto &object : objects)
     object->onEvent(event);

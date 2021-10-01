@@ -1,7 +1,7 @@
 #include <string>
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
-#include <engine/renderer/renderer.hpp>
+#include <engine/renderer/scene.hpp>
 #include <engine/core/window.hpp>
 
 class Application
@@ -24,7 +24,7 @@ protected:
   bool fullScreen;
 
   Window *window;
-  Renderer *renderer;
+  Scene *scene;
   Camera *camera;
 
 private:
