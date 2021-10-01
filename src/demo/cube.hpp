@@ -64,12 +64,24 @@ public:
     glEnableVertexAttribArray(0);
   }
 
-  void render(std::unique_ptr<Camera> &camera)
+  void render(Camera *camera)
   {
     Renderable::render(camera);
 
     glBindVertexArray(vao);
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glBindVertexArray(0);
+  }
+
+  bool onWindowResize(WindowResizeEvent &event) override
+  {
+    std::cout << event.toString() << std::endl;
+    return true;
+  }
+
+  bool onMouseMove(MouseMoveEvent &event) override
+  {
+    std::cout << event.toString() << std::endl;
+    return true;
   }
 };

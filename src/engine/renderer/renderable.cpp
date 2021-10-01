@@ -15,7 +15,7 @@ void Renderable::bind()
   uniform_proj = glGetUniformLocation(shader->id, "projection");
 }
 
-void Renderable::render(std::unique_ptr<Camera> &camera)
+void Renderable::render(Camera *camera)
 {
   // Attach to program_id
   shader->use();
@@ -26,4 +26,11 @@ void Renderable::render(std::unique_ptr<Camera> &camera)
   // glUniformMatrix4fv(uniform_model, 1, GL_FALSE, value_ptr(model));
   glUniformMatrix4fv(uniform_view, 1, GL_FALSE, value_ptr(view));
   glUniformMatrix4fv(uniform_proj, 1, GL_FALSE, value_ptr(projection));
+}
+
+void Renderable::onEvent(Event &event)
+{
+  EventDispatcher dispatcher(event);
+  dispatcher.dispatch<WindowResizeEvent>(RE_BIND_EVENT_FN(onWindowResize));
+  dispatcher.dispatch<MouseMoveEvent>(RE_BIND_EVENT_FN(onMouseMove));
 }

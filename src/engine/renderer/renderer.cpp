@@ -2,12 +2,17 @@
 #include <engine/renderer/renderer.hpp>
 #include <engine/renderer/shader.hpp>
 
-void Renderer::addObject(std::unique_ptr<Renderable> &object)
+void Renderer::addObject(Renderable *object)
 {
   objects.emplace_back(std::move(object));
 }
 
-void Renderer::render(std::unique_ptr<Camera> &camera)
+std::vector<Renderable *> Renderer::getObjects() const
+{
+  return objects;
+}
+
+void Renderer::render(Camera *camera)
 {
   for (auto &object : objects)
     object->render(camera);

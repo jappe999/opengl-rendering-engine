@@ -8,7 +8,7 @@ class MyApp : public Application
 public:
   void onStart() override
   {
-    auto cube = std::unique_ptr<Renderable>(new Cube());
+    Renderable *cube = new Cube();
     cube->useShader(Shader::acquire("base"));
     cube->bind();
     renderer->addObject(cube);
