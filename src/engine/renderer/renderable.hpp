@@ -4,12 +4,12 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <libs/glad/glad.h>
 #include <engine/renderer/shader.hpp>
+#include <engine/renderer/node.hpp>
 #include <engine/renderer/camera.hpp>
-#include <engine/events/event.hpp>
 
 using namespace glm;
 
-class Renderable
+class Renderable : public Node
 {
 public:
   Renderable() {}
@@ -19,9 +19,6 @@ public:
 
   virtual void bind();
   virtual void render(Camera *camera);
-  virtual void onEvent(Event &event);
-  virtual bool onWindowResize(WindowResizeEvent &event) { return false; }
-  virtual bool onMouseMove(MouseMoveEvent &event) { return false; }
 
 protected:
   GLuint vao;

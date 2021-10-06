@@ -23,10 +23,6 @@ bool Application::create(int32_t width, int32_t height, bool fullScreen)
   printf("OpenGL version supported %s\n", glVersion);
   printf("Shader supported %s\n", glShader);
 
-  camera = new Camera();
-  camera->setAspectRatio(float(width) / height);
-  scene = new Scene();
-
   return true;
 }
 
@@ -68,8 +64,8 @@ void Application::destroy()
 
 void Application::onEvent(Event &event)
 {
-  auto objects = scene->getObjects();
+  auto nodes = scene->getNodes();
 
-  for (auto &object : objects)
-    object->onEvent(event);
+  for (auto &node : nodes)
+    node->onEvent(event);
 }

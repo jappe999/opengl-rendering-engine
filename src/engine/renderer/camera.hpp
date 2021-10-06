@@ -1,10 +1,11 @@
 #pragma once
 
 #include <glm/gtc/matrix_transform.hpp>
+#include <engine/renderer/node.hpp>
 
 using namespace glm;
 
-class Camera
+class Camera : public Node
 {
 public:
   Camera();

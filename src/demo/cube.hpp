@@ -72,16 +72,4 @@ public:
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glBindVertexArray(0);
   }
-
-  bool onWindowResize(WindowResizeEvent &event) override
-  {
-    std::cout << event.toString() << std::endl;
-    return true;
-  }
-
-  bool onMouseMove(MouseMoveEvent &event) override
-  {
-    std::cout << event.toString() << std::endl;
-    return true;
-  }
 };

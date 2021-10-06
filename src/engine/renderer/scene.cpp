@@ -1,21 +1,26 @@
 #include <iostream>
 #include <engine/renderer/scene.hpp>
 #include <engine/renderer/shader.hpp>
+#include <engine/renderer/renderable.hpp>
 
-void Scene::addObject(Renderable *object)
+void Scene::addNode(Node *node)
 {
-  objects.emplace_back(std::move(object));
+  nodes.emplace_back(std::move(node));
 }
 
-std::vector<Renderable *> Scene::getObjects() const
+std::vector<Node *> Scene::getNodes() const
 {
-  return objects;
+  return nodes;
 }
 
 void Scene::render(Camera *camera)
 {
-  for (auto &object : objects)
-    object->render(camera);
+  for (auto node : nodes)
+  {
+    // Validate that the node can be rendered.
+    if (node->isA<Renderable>())
+      dynamic_cast<Renderable *>(node)->render(camera);
+  }
 }
 
 Scene::Scene()
@@ -24,5 +29,5 @@ Scene::Scene()
 
 Scene::~Scene()
 {
-  objects.clear();
+  nodes.clear();
 }
