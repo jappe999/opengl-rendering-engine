@@ -7,7 +7,7 @@
 class Application
 {
 public:
-  string title = "OpenGL Rendering Engine";
+  std::string title = "OpenGL Rendering Engine";
 
   Application(){};
   ~Application(){};

@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 #include <glm/gtc/matrix_transform.hpp>
-#include <engine/renderer/renderable.hpp>
+#include <engine/renderer/node.hpp>
 #include <engine/renderer/camera.hpp>
 
 class Scene
@@ -14,9 +14,9 @@ public:
 
   void render(Camera *camera);
 
-  void addObject(Renderable *object);
-  std::vector<Renderable *> getObjects() const;
+  void addNode(Node *node);
+  std::vector<Node *> getNodes() const;
 
 private:
-  std::vector<Renderable *> objects;
+  std::vector<Node *> nodes;
 };

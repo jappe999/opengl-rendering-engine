@@ -27,10 +27,3 @@ void Renderable::render(Camera *camera)
   glUniformMatrix4fv(uniform_view, 1, GL_FALSE, value_ptr(view));
   glUniformMatrix4fv(uniform_proj, 1, GL_FALSE, value_ptr(projection));
 }
-
-void Renderable::onEvent(Event &event)
-{
-  EventDispatcher dispatcher(event);
-  dispatcher.dispatch<WindowResizeEvent>(RE_BIND_EVENT_FN(onWindowResize));
-  dispatcher.dispatch<MouseMoveEvent>(RE_BIND_EVENT_FN(onMouseMove));
-}
