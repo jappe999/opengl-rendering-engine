@@ -1,4 +1,6 @@
 #include <engine/core/window.hpp>
+#include <engine/events/mouse.hpp>
+#include <engine/events/window.hpp>
 
 Window::Window(std::string title, int32_t width, int32_t height)
 {
