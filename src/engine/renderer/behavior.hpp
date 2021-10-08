@@ -1,6 +1,7 @@
 #pragma once
 
-#include <engine/events/event.hpp>
+#include <engine/events/mouse.hpp>
+#include <engine/events/window.hpp>
 
 class Node;
 
