@@ -18,9 +18,10 @@ public:
     camera->addBehavior(cameraController);
     scene->addNode(camera);
 
-    Renderable *cube = new Cube();
+    Cube *cube = new Cube();
     cube->useShader(Shader::acquire("base"));
     cube->bind();
+    cube->rotate(45.0f, vec3(0, 1, 0));
     scene->addNode(cube);
   }
 

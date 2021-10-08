@@ -2,10 +2,10 @@
 
 Camera::Camera()
 {
-  targetFront = vec3(0.0f, 0.0f, 1.0f);
+  targetFront = vec3(0.0f, 0.0f, -1.0f);
   position = vec3(0.0f, 0.0f, -5.0f);
-  orientation = vec3(0.0f, 0.0f, 0.0f);
-  yaw = 0;
+  orientation = vec3(0.0f, 1.0f, 0.0f);
+  yaw = 90;
   pitch = 0;
 
   updateVectors();
@@ -20,9 +20,36 @@ vec3 Camera::getPosition()
   return position;
 }
 
-void Camera::setPosition(vec3 position)
+void Camera::translate(vec3 translation)
+{
+  this->position += translation;
+}
+
+void Camera::translateTo(vec3 position)
 {
   this->position = position;
+}
+
+double Camera::getPitch()
+{
+  return pitch;
+}
+
+double Camera::getYaw()
+{
+  return yaw;
+}
+
+void Camera::rotate(vec3 rotation)
+{
+  yaw += rotation.x;
+  pitch += rotation.y;
+}
+
+void Camera::rotateTo(vec3 rotation)
+{
+  yaw = rotation.x;
+  pitch = rotation.y;
 }
 
 void Camera::updateVectors()
@@ -39,6 +66,7 @@ void Camera::updateVectors()
 
 const mat4 Camera::getViewMatrix()
 {
+  updateVectors();
   return lookAt(position, position + targetFront, targetUp);
 }
 
