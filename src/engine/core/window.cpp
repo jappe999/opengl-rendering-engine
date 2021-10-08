@@ -39,6 +39,8 @@ bool Window::createContext()
       window,
       [](GLFWwindow *window, int32_t width, int32_t height)
       {
+        glViewport(0, 0, width, height); // fix up the viewport to maintain aspect ratio
+
         WindowData data = *(WindowData *)glfwGetWindowUserPointer(window);
         data.width = width;
         data.height = height;

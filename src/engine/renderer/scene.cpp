@@ -18,7 +18,7 @@ void Scene::render(Camera *camera)
   for (auto node : nodes)
   {
     // Validate that the node can be rendered.
-    if (node->isA<Renderable>())
+    if (node->isDerivedFrom<Renderable>())
       dynamic_cast<Renderable *>(node)->render(camera);
   }
 }
