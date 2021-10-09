@@ -8,7 +8,11 @@
 enum EventType
 {
   WindowResize,
-  MouseMove
+  MouseMove,
+  KeyPress,
+  KeyRepeat,
+  KeyRelease,
+  KeyChar,
 };
 
 /** A convience macro for getting information about the event. */

@@ -63,6 +63,10 @@ public:
   const mat4 getViewMatrix();
   const mat4 getProjectionMatrix();
 
+  const vec3 getTargetFront() { return targetFront; }
+  const vec3 getTargetRight() { return targetRight; }
+  const vec3 getTargetUp() { return targetUp; }
+
   void setAspectRatio(float ratio);
   float getAspectRatio();
 
