@@ -1,6 +1,7 @@
 #include <engine/core/window.hpp>
 #include <engine/events/mouse.hpp>
 #include <engine/events/window.hpp>
+#include <engine/events/key.hpp>
 
 Window::Window(std::string title, int32_t width, int32_t height)
 {
@@ -58,6 +59,47 @@ bool Window::createContext()
         WindowData data = *(WindowData *)glfwGetWindowUserPointer(window);
 
         MouseMoveEvent event(x, y);
+        data.eventCallback(event);
+      });
+
+  glfwSetKeyCallback(
+      window,
+      [](GLFWwindow *window, int key, int scancode, int action, int mods)
+      {
+        WindowData data = *(WindowData *)glfwGetWindowUserPointer(window);
+
+        switch (action)
+        {
+        case GLFW_PRESS:
+        {
+          KeyPressEvent event(key, mods);
+          data.eventCallback(event);
+          break;
+        }
+
+        case GLFW_REPEAT:
+        {
+          KeyRepeatEvent event(key, mods);
+          data.eventCallback(event);
+          break;
+        }
+
+        case GLFW_RELEASE:
+        {
+          KeyReleaseEvent event(key, mods);
+          data.eventCallback(event);
+          break;
+        }
+        }
+      });
+
+  glfwSetCharCallback(
+      window,
+      [](GLFWwindow *window, unsigned int keycode)
+      {
+        WindowData data = *(WindowData *)glfwGetWindowUserPointer(window);
+
+        KeyCharEvent event(keycode);
         data.eventCallback(event);
       });
 
