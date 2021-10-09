@@ -1,5 +1,7 @@
 #include <engine/core/application.hpp>
 
+Application *Application::instance = nullptr;
+
 bool Application::create(int32_t width, int32_t height, bool fullScreen)
 {
   window = new Window(title, width, height);
@@ -46,6 +48,10 @@ void Application::start()
 
     glClearColor(0, 0, 0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    float time = (float)glfwGetTime();
+    deltaTime = time - lastFrameTime;
+    lastFrameTime = time;
 
     scene->render(camera);
 

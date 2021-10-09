@@ -1,5 +1,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <engine/renderer/behavior.hpp>
+#include <engine/core/input.hpp>
 
 using namespace glm;
 
@@ -11,20 +12,55 @@ public:
     camera = dynamic_cast<Camera *>(node);
   }
 
+  void onUpdate()
+  {
+    move();
+    rotate();
+  }
+
   bool onWindowResize(WindowResizeEvent &event) override
   {
     camera->setAspectRatio((float)event.getWidth() / event.getHeight());
     return true;
   }
 
-  bool onMouseMove(MouseMoveEvent &event) override
+private:
+  Camera *camera;
+
+  float movementSpeed = 1.0f;
+
+  double prevYaw = 0, prevPitch = 0;
+
+  void move()
+  {
+    float speed = movementSpeed * Application::getInstance().getDeltaTime();
+
+    float forward = 0;
+    if (Input::isKeyPressed(GLFW_KEY_W) || Input::isKeyPressed(GLFW_KEY_UP))
+      forward = speed;
+    else if (Input::isKeyPressed(GLFW_KEY_S) || Input::isKeyPressed(GLFW_KEY_DOWN))
+      forward = -speed;
+
+    camera->translate(camera->getTargetFront() * forward);
+
+    float right = 0;
+    if (Input::isKeyPressed(GLFW_KEY_A) || Input::isKeyPressed(GLFW_KEY_LEFT))
+      right = -speed;
+    else if (Input::isKeyPressed(GLFW_KEY_D) || Input::isKeyPressed(GLFW_KEY_RIGHT))
+      right = speed;
+
+    camera->translate(camera->getTargetRight() * right);
+  }
+
+  void rotate()
   {
     static float maxY = 22.0f;
+    vec2 position = Input::getCursorPosition();
 
-    double relativeYaw = (prevYaw - event.getX()) * 0.5;
-    double relativePitch = (prevPitch - event.getY()) * 0.5;
-    prevYaw = event.getX();
-    prevPitch = event.getY();
+    double relativeYaw = (prevYaw - position.x) * movementSpeed * Application::getInstance().getDeltaTime();
+    double relativePitch = (prevPitch - position.y) * movementSpeed * Application::getInstance().getDeltaTime();
+    prevYaw = position.x;
+    prevPitch = position.y;
 
     float nextPitch = relativePitch + camera->getPitch();
 
@@ -35,45 +71,5 @@ public:
       relativePitch -= nextPitch + maxY;
 
     camera->rotate(vec3(-relativeYaw, relativePitch, 0.0));
-    return true;
-  }
-
-  bool onKeyPress(KeyPressEvent &event) override
-  {
-    move(event.getKey());
-    return true;
-  }
-
-  bool onKeyRepeat(KeyRepeatEvent &event) override
-  {
-    move(event.getKey());
-    return true;
-  }
-
-private:
-  Camera *camera;
-
-  float movementSpeed = 0.5f;
-
-  double prevYaw = 0, prevPitch = 0;
-
-  void move(uint32_t key)
-  {
-    float speed = 0.1;
-
-    float forward = 0;
-    if (key == GLFW_KEY_W || key == GLFW_KEY_UP)
-      forward = speed;
-    else if (key == GLFW_KEY_S || key == GLFW_KEY_DOWN)
-      forward = -speed;
-
-    camera->translate(camera->getTargetFront() * forward);
-
-    float right = 0;
-    if (key == GLFW_KEY_A || key == GLFW_KEY_LEFT)
-      right = -speed;
-    else if (key == GLFW_KEY_D || key == GLFW_KEY_RIGHT)
-      right = speed;
-    camera->translate(camera->getTargetRight() * right);
   }
 };

@@ -9,8 +9,12 @@ class Application
 public:
   std::string title = "OpenGL Rendering Engine";
 
-  Application(){};
-  ~Application(){};
+  Application() { instance = this; }
+  ~Application() {}
+
+  static Application &getInstance() { return *instance; }
+  Window &getWindow() { return *window; }
+  float getDeltaTime() { return deltaTime; }
 
   virtual void onStart() {}
   virtual void onDestroy() {}
@@ -31,4 +35,8 @@ private:
   void onEvent(Event &event);
 
   bool hasStarted = false;
+
+  float lastFrameTime, deltaTime;
+
+  static Application *instance;
 };
