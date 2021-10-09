@@ -12,6 +12,8 @@ public:
   Behavior(Node *node) { this->node = node; }
   ~Behavior() {}
 
+  virtual void onUpdate() {}
+
   void onEvent(Event &event)
   {
     EventDispatcher dispatcher(event);

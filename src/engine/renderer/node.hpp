@@ -12,6 +12,7 @@ public:
   ~Node() = default;
 
   void addBehavior(Behavior *behavior);
+  virtual void onUpdate();
   virtual void onEvent(Event &event);
 
   template <typename T>
