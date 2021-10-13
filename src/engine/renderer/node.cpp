@@ -1,5 +1,6 @@
 #include <engine/renderer/node.hpp>
 #include <engine/renderer/renderable.hpp>
+#include <engine/renderer/behavior.hpp>
 
 void Node::addBehavior(Behavior *behavior)
 {
