@@ -3,16 +3,13 @@
 #include <engine/events/mouse.hpp>
 #include <engine/events/window.hpp>
 #include <engine/events/key.hpp>
+#include <engine/renderer/node.hpp>
 
-class Node;
-
-class Behavior
+class Behavior : public Node
 {
 public:
-  Behavior(Node *node) { this->node = node; }
-  ~Behavior() {}
-
-  virtual void onUpdate() {}
+  Behavior(Node *node) : Node(node) {}
+  ~Behavior() = default;
 
   void onEvent(Event &event)
   {

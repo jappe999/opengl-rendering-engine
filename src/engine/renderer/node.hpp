@@ -2,13 +2,14 @@
 
 #include <vector>
 #include <iostream>
-#include <engine/renderer/behavior.hpp>
 #include <engine/events/event.hpp>
+
+class Behavior;
 
 class Node
 {
 public:
-  Node() = default;
+  Node(Node *parent = nullptr) { this->parent = parent; };
   ~Node() = default;
 
   void addBehavior(Behavior *behavior);
@@ -21,6 +22,11 @@ public:
   template <typename T>
   bool isDerivedFrom() { return dynamic_cast<T *>(this); }
 
+  bool hasParent() { return parent != nullptr; }
+  Node *getParent() { return parent; }
+
 private:
   std::vector<Behavior *> behaviors;
+
+  Node *parent;
 };
