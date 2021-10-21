@@ -38,7 +38,7 @@ bool Window::createContext()
     return false;
   }
 
-  // glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+  glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
   glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
 
   glfwSetWindowSizeCallback(

@@ -9,6 +9,8 @@ Scene *SceneLoader::deserialize(std::string path)
 
   YAML::Node config = YAML::LoadFile(getPath(path));
 
+  std::cout << "Loading scene '" << config["name"] << "'" << std::endl;
+
   for (auto nodeConfig : config["nodes"])
   {
     Node *node = NodeFactory::create(nodeConfig["type"].as<std::string>());
