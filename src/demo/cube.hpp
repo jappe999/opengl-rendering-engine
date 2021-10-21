@@ -5,6 +5,8 @@
 class Cube : public Renderable
 {
 public:
+  Cube(Node *parent = nullptr) : Renderable(parent) {}
+
   void bind()
   {
     Renderable::bind();
@@ -73,3 +75,5 @@ public:
     glBindVertexArray(0);
   }
 };
+
+ORE_REGISTER_NODE(Cube, "cube");

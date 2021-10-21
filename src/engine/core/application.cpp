@@ -1,6 +1,13 @@
 #include <engine/core/application.hpp>
+#include <engine/core/scene_loader.hpp>
 
 Application *Application::instance = nullptr;
+
+void Application::loadScene(std::string path)
+{
+  scene = SceneLoader::deserialize(path);
+  camera = scene->getMainCamera();
+}
 
 bool Application::create(int32_t width, int32_t height, bool fullScreen)
 {

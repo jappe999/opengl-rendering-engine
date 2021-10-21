@@ -8,7 +8,7 @@ using namespace glm;
 class Camera : public Node
 {
 public:
-  Camera();
+  Camera(Node *parent = nullptr);
   ~Camera();
 
   /**

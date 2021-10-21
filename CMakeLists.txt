@@ -13,4 +13,7 @@ add_executable(main ${SOURCES})
 find_package(glfw3 CONFIG REQUIRED)
 target_link_libraries(main PRIVATE glfw)
 
+find_package(yaml-cpp CONFIG REQUIRED)
+target_link_libraries(main PRIVATE yaml-cpp)
+
 file(COPY assets DESTINATION .)

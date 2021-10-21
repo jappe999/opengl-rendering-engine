@@ -9,7 +9,7 @@ class CameraController : public Behavior
 public:
   CameraController(Node *node) : Behavior(node)
   {
-    camera = dynamic_cast<Camera *>(node);
+    camera = node->cast<Camera *>();
   }
 
   void onUpdate()
@@ -73,3 +73,5 @@ private:
     camera->rotate(vec3(-relativeYaw, relativePitch, 0.0));
   }
 };
+
+ORE_REGISTER_NODE(CameraController, "camera_controller");

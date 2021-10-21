@@ -2,6 +2,8 @@
 #include <engine/renderer/renderable.hpp>
 #include <engine/renderer/behavior.hpp>
 
+ORE_REGISTER_NODE(Node, "ore_node");
+
 void Node::addBehavior(Behavior *behavior)
 {
   behaviors.emplace_back(behavior);

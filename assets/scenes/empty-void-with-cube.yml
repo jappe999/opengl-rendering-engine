@@ -1,0 +1,18 @@
+name: 'Scene name'
+
+shaders:
+  &1 base:
+    properties: []
+
+nodes:
+  - type: ore_camera
+    position: [0, 0, 0]
+    scripts:
+      - camera_controller
+    properties:
+      main: true
+  - type: cube
+    position: [0, 0, 0]
+    rotation: [45.0, 0, 1, 0]
+    shaders:
+      - *1

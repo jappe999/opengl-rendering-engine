@@ -3,6 +3,7 @@
   "description": "A simple rendering engine built with C++ and OpenGL.",
   "version-string": "0.0.1",
   "dependencies": [
-    "glfw3"
+    "glfw3",
+    "yaml-cpp"
   ]
 }
