@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <engine/events/event.hpp>
+#include <engine/core/node_factory.hpp>
 
 class Behavior;
 
@@ -21,6 +22,9 @@ public:
 
   template <typename T>
   bool isDerivedFrom() { return dynamic_cast<T *>(this); }
+
+  template <typename T>
+  T cast() { return dynamic_cast<T>(this); }
 
   bool hasParent() { return parent != nullptr; }
   Node *getParent() { return parent; }

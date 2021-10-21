@@ -1,6 +1,8 @@
-#include "camera.hpp"
+#include <engine/renderer/camera.hpp>
 
-Camera::Camera()
+ORE_REGISTER_NODE(Camera, "ore_camera");
+
+Camera::Camera(Node *parent) : Node(parent)
 {
   targetFront = vec3(0.0f, 0.0f, -1.0f);
   position = vec3(0.0f, 0.0f, -5.0f);

@@ -16,6 +16,8 @@ public:
   Window &getWindow() { return *window; }
   float getDeltaTime() { return deltaTime; }
 
+  void loadScene(std::string path);
+
   virtual void onStart() {}
   virtual void onDestroy() {}
 
