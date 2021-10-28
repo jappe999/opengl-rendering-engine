@@ -17,6 +17,16 @@ Camera::~Camera()
 {
 }
 
+vec3 Camera::getOrientation()
+{
+  return orientation;
+}
+
+void Camera::setOrientation(vec3 orientation)
+{
+  this->orientation = orientation;
+}
+
 vec3 Camera::getPosition()
 {
   return position;
@@ -46,12 +56,14 @@ void Camera::rotate(vec3 rotation)
 {
   yaw += rotation.x;
   pitch += rotation.y;
+  orientation.z += rotation.z;
 }
 
 void Camera::rotateTo(vec3 rotation)
 {
   yaw = rotation.x;
   pitch = rotation.y;
+  orientation.z = rotation.z;
 }
 
 void Camera::updateVectors()

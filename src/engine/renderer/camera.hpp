@@ -12,7 +12,17 @@ public:
   ~Camera();
 
   /**
-   * @brief Get the current position of the node.
+   * @brief Get the current orientation of the camera.
+   */
+  vec3 getOrientation();
+
+  /**
+   * @brief Set the current orientation of the camera.
+   */
+  void setOrientation(vec3 orientation);
+
+  /**
+   * @brief Get the current position of the camera.
    *
    * @return vec3
    */

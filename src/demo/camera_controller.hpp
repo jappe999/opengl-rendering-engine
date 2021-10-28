@@ -27,7 +27,9 @@ public:
 private:
   Camera *camera;
 
-  float movementSpeed = 1.0f;
+  float movementSpeed = 2.0f;
+
+  bool rotateZLeft = true;
 
   double prevYaw = 0, prevPitch = 0;
 
@@ -50,6 +52,27 @@ private:
       right = speed;
 
     camera->translate(camera->getTargetRight() * right);
+
+    vec3 orientation = camera->getOrientation();
+    if (forward != 0 || right != 0)
+    {
+      if (orientation.z >= 0.05)
+        rotateZLeft = true;
+      else if (orientation.z <= -0.05)
+        rotateZLeft = false;
+
+      orientation.z += rotateZLeft ? -0.005 : 0.005;
+    }
+    else
+    {
+      if (orientation.z > 0.005)
+        orientation.z -= 0.005;
+      else if (orientation.z < -0.005)
+        orientation.z += 0.005;
+      else
+        orientation.z = 0;
+    }
+    camera->setOrientation(orientation);
   }
 
   void rotate()
