@@ -9,7 +9,10 @@ class Application
 public:
   std::string title = "OpenGL Rendering Engine";
 
-  Application() { instance = this; }
+  Application() : scene(nullptr), camera(nullptr)
+  {
+    instance = this;
+  }
   ~Application() {}
 
   static Application &getInstance() { return *instance; }
@@ -17,6 +20,7 @@ public:
   float getDeltaTime() { return deltaTime; }
 
   void loadScene(std::string path);
+  void unloadCurrentScene();
 
   virtual void onStart() {}
   virtual void onDestroy() {}
