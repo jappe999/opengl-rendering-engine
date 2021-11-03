@@ -6,7 +6,7 @@ shaders:
 
 nodes:
   - type: ore_camera
-    position: [0, 0, 0]
+    position: [0, 0, -5]
     scripts:
       - camera_controller
     properties:
