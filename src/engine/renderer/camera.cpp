@@ -2,7 +2,7 @@
 
 ORE_REGISTER_NODE(Camera, "ore_camera");
 
-Camera::Camera(Node *parent) : Node(parent)
+Camera::Camera(Node *parent) : WorldNode(parent)
 {
   targetFront = vec3(0.0f, 0.0f, -1.0f);
   position = vec3(0.0f, 0.0f, -5.0f);
@@ -25,21 +25,6 @@ vec3 Camera::getOrientation()
 void Camera::setOrientation(vec3 orientation)
 {
   this->orientation = orientation;
-}
-
-vec3 Camera::getPosition()
-{
-  return position;
-}
-
-void Camera::translate(vec3 translation)
-{
-  this->position += translation;
-}
-
-void Camera::translateTo(vec3 position)
-{
-  this->position = position;
 }
 
 double Camera::getPitch()

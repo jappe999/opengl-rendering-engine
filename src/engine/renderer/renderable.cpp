@@ -33,33 +33,3 @@ void Renderable::render(Camera *camera)
   glUniformMatrix4fv(uniform_view, 1, GL_FALSE, value_ptr(view));
   glUniformMatrix4fv(uniform_proj, 1, GL_FALSE, value_ptr(projection));
 }
-
-vec3 Renderable::getPosition()
-{
-  return position;
-}
-
-void Renderable::translate(vec3 translation)
-{
-  position += translation;
-}
-
-void Renderable::translateTo(vec3 position)
-{
-  this->position = position;
-}
-
-void Renderable::rotate(float degrees, vec3 axes)
-{
-  rotation += vec4(axes * degrees, degrees);
-}
-
-void Renderable::scale(vec3 scale)
-{
-  scaling = scale;
-}
-
-void Renderable::scale(float scale)
-{
-  return Renderable::scale(vec3(scale));
-}
