@@ -3,12 +3,12 @@
 #include <engine/events/mouse.hpp>
 #include <engine/events/window.hpp>
 #include <engine/events/key.hpp>
-#include <engine/renderer/node.hpp>
+#include <engine/renderer/world_node.hpp>
 
 class Behavior : public Node
 {
 public:
-  Behavior(Node *node) : Node(node) {}
+  Behavior(WorldNode *node) : Node(node), node(node) {}
   ~Behavior() = default;
 
   void onEvent(Event &event)
@@ -29,5 +29,5 @@ public:
   virtual bool onKeyChar(KeyCharEvent &event) { return false; }
 
 protected:
-  Node *node;
+  WorldNode *node;
 };

@@ -5,8 +5,21 @@ Application *Application::instance = nullptr;
 
 void Application::loadScene(std::string path)
 {
+  unloadCurrentScene();
   scene = SceneLoader::deserialize(path);
   camera = scene->getMainCamera();
+}
+
+void Application::unloadCurrentScene()
+{
+  if (scene != nullptr)
+  {
+    delete scene;
+    scene = nullptr;
+
+    // Camera is removed by the scene.
+    camera = nullptr;
+  }
 }
 
 bool Application::create(int32_t width, int32_t height, bool fullScreen)
@@ -72,6 +85,7 @@ void Application::start()
 
 void Application::destroy()
 {
+  unloadCurrentScene();
   onDestroy();
 }
 

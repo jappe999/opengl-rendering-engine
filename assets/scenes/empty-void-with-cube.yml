@@ -6,13 +6,15 @@ shaders:
 
 nodes:
   - type: ore_camera
-    position: [0, 0, 0]
+    position: [0, 0, -5]
     scripts:
       - camera_controller
     properties:
       main: true
   - type: cube
     position: [0, 0, 0]
-    rotation: [45.0, 0, 1, 0]
+    rotation: [0, 1, 0, 45.0]
+    scripts:
+      - cube_controller
     shaders:
       - *1

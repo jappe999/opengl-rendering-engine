@@ -4,6 +4,16 @@
 
 ORE_REGISTER_NODE(Node, "ore_node");
 
+Node::~Node()
+{
+  for (auto behavior : behaviors)
+  {
+    delete behavior;
+    behavior = nullptr;
+  }
+  behaviors.clear();
+}
+
 void Node::addBehavior(Behavior *behavior)
 {
   behaviors.emplace_back(behavior);

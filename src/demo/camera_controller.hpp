@@ -7,9 +7,11 @@ using namespace glm;
 class CameraController : public Behavior
 {
 public:
-  CameraController(Node *node) : Behavior(node)
+  CameraController(WorldNode *node) : Behavior(node)
   {
     camera = node->cast<Camera *>();
+    prevYaw = Input::getCursorPosition().x;
+    prevPitch = Input::getCursorPosition().y;
   }
 
   void onUpdate()
@@ -27,9 +29,11 @@ public:
 private:
   Camera *camera;
 
-  float movementSpeed = 1.0f;
+  float movementSpeed = 2.0f;
 
-  double prevYaw = 0, prevPitch = 0;
+  bool rotateZLeft = true;
+
+  float prevYaw = 0, prevPitch = 0;
 
   void move()
   {
@@ -50,6 +54,27 @@ private:
       right = speed;
 
     camera->translate(camera->getTargetRight() * right);
+
+    vec3 orientation = camera->getOrientation();
+    if (forward != 0 || right != 0)
+    {
+      if (orientation.z >= 0.05)
+        rotateZLeft = true;
+      else if (orientation.z <= -0.05)
+        rotateZLeft = false;
+
+      orientation.z += rotateZLeft ? -0.005 : 0.005;
+    }
+    else
+    {
+      if (orientation.z > 0.005)
+        orientation.z -= 0.005;
+      else if (orientation.z < -0.005)
+        orientation.z += 0.005;
+      else
+        orientation.z = 0;
+    }
+    camera->setOrientation(orientation);
   }
 
   void rotate()
@@ -57,8 +82,8 @@ private:
     static float maxY = 22.0f;
     vec2 position = Input::getCursorPosition();
 
-    double relativeYaw = (prevYaw - position.x) * movementSpeed * Application::getInstance().getDeltaTime();
-    double relativePitch = (prevPitch - position.y) * movementSpeed * Application::getInstance().getDeltaTime();
+    float relativeYaw = (prevYaw - position.x) * movementSpeed * Application::getInstance().getDeltaTime();
+    float relativePitch = (prevPitch - position.y) * movementSpeed * Application::getInstance().getDeltaTime();
     prevYaw = position.x;
     prevPitch = position.y;
 
@@ -70,7 +95,8 @@ private:
     if (nextPitch < -maxY)
       relativePitch -= nextPitch + maxY;
 
-    camera->rotate(vec3(-relativeYaw, relativePitch, 0.0));
+    camera->rotate(-relativeYaw, vec3(1.0f, 0.0f, 0.0f));
+    camera->rotate(relativePitch, vec3(0.0f, 1.0f, 0.0f));
   }
 };
 

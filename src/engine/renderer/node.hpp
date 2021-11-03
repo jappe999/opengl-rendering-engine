@@ -11,7 +11,7 @@ class Node
 {
 public:
   Node(Node *parent = nullptr) { this->parent = parent; };
-  ~Node() = default;
+  ~Node();
 
   void addBehavior(Behavior *behavior);
   virtual void onUpdate();

@@ -2,7 +2,7 @@
 
 ORE_REGISTER_NODE(Camera, "ore_camera");
 
-Camera::Camera(Node *parent) : Node(parent)
+Camera::Camera(Node *parent) : WorldNode(parent)
 {
   targetFront = vec3(0.0f, 0.0f, -1.0f);
   position = vec3(0.0f, 0.0f, -5.0f);
@@ -17,19 +17,14 @@ Camera::~Camera()
 {
 }
 
-vec3 Camera::getPosition()
+vec3 Camera::getOrientation()
 {
-  return position;
+  return orientation;
 }
 
-void Camera::translate(vec3 translation)
+void Camera::setOrientation(vec3 orientation)
 {
-  this->position += translation;
-}
-
-void Camera::translateTo(vec3 position)
-{
-  this->position = position;
+  this->orientation = orientation;
 }
 
 double Camera::getPitch()
@@ -42,16 +37,20 @@ double Camera::getYaw()
   return yaw;
 }
 
-void Camera::rotate(vec3 rotation)
+void Camera::rotate(float angle, vec3 axes)
 {
-  yaw += rotation.x;
-  pitch += rotation.y;
+  // std::cout << "Angle: " << angle << ", X: " << axes.x << ", Y: " << axes.y << ", Z: " << axes.z << std::endl
+  // << "Yaw: " << yaw << ", Pitch: " << pitch << ", Roll: " << orientation.z << std::endl;
+  yaw += angle * axes.x;
+  pitch += angle * axes.y;
+  orientation.z += angle * axes.z;
 }
 
-void Camera::rotateTo(vec3 rotation)
+void Camera::rotateTo(float angle, vec3 axes)
 {
-  yaw = rotation.x;
-  pitch = rotation.y;
+  yaw = angle * axes.x;
+  pitch = angle * axes.y;
+  orientation.z = angle * axes.z;
 }
 
 void Camera::updateVectors()

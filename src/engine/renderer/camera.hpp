@@ -1,64 +1,45 @@
 #pragma once
 
 #include <glm/gtc/matrix_transform.hpp>
-#include <engine/renderer/node.hpp>
+#include <engine/renderer/world_node.hpp>
 
 using namespace glm;
 
-class Camera : public Node
+class Camera : public WorldNode
 {
 public:
   Camera(Node *parent = nullptr);
   ~Camera();
 
   /**
-   * @brief Get the current position of the node.
-   *
-   * @return vec3
+   * @brief Get the current orientation of the camera.
    */
-  vec3 getPosition();
+  vec3 getOrientation();
 
   /**
-   * @brief Translate the node relative to the current position.
-   *
-   * @param translation
+   * @brief Set the current orientation of the camera.
    */
-  void translate(vec3 translation);
-
-  /**
-   * @brief Translate the node to the given position.
-   *
-   * @param position
-   */
-  void translateTo(vec3 position);
+  void setOrientation(vec3 orientation);
 
   /**
    * @brief Get the yaw rotation (X value).
-   *
-   * @return double
    */
   double getYaw();
 
   /**
    * @brief Get the pitch rotation (Y value).
-   *
-   * @return double
    */
   double getPitch();
 
   /**
    * @brief Rotate relatively.
-   *
-   * @param rotation
    */
-  void rotate(vec3 rotation);
+  void rotate(float angle, vec3 axes);
 
   /**
    * @brief Set absolute rotation.
-   *
-   * @param rotation
    */
-  void rotateTo(vec3 rotation);
+  void rotateTo(float angle, vec3 axes);
 
   const mat4 getViewMatrix();
   const mat4 getProjectionMatrix();
@@ -76,9 +57,6 @@ private:
 
   // The angle resolved into a direction vector.
   vec3 orientation;
-
-  // The inverted position of the camera.
-  vec3 position;
 
   // The normalized direction vectors.
   vec3 targetFront, targetRight, targetUp;

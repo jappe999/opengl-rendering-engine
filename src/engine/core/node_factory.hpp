@@ -5,11 +5,12 @@
 #include <iostream>
 
 class Node;
+class WorldNode;
 
 struct NodeFactory
 {
 private:
-  typedef Node *NodeInstantiator(Node *parentNode);
+  typedef Node *NodeInstantiator(WorldNode *parentNode);
   typedef std::map<std::string, NodeInstantiator *> NodeInstantiators;
   static NodeInstantiators &instantiators()
   {
@@ -18,7 +19,7 @@ private:
   }
 
 public:
-  static Node *create(const std::string id, Node *parentNode = nullptr)
+  static Node *create(const std::string id, WorldNode *parentNode = nullptr)
   {
     // Find the instantiator function for the id.
     const NodeInstantiators::const_iterator iterator = instantiators().find(id);
@@ -35,7 +36,7 @@ private:
   template <class T = int>
   struct Register
   {
-    static Node *create(Node *parentNode = nullptr) { return new T(parentNode); }
+    static Node *create(WorldNode *parentNode = nullptr) { return new T(parentNode); }
     static NodeInstantiator *withId(const std::string id)
     {
       std::cout << id << std::endl;
