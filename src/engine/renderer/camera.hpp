@@ -23,31 +23,23 @@ public:
 
   /**
    * @brief Get the yaw rotation (X value).
-   *
-   * @return double
    */
   double getYaw();
 
   /**
    * @brief Get the pitch rotation (Y value).
-   *
-   * @return double
    */
   double getPitch();
 
   /**
    * @brief Rotate relatively.
-   *
-   * @param rotation
    */
-  void rotate(vec3 rotation);
+  void rotate(float angle, vec3 axes);
 
   /**
    * @brief Set absolute rotation.
-   *
-   * @param rotation
    */
-  void rotateTo(vec3 rotation);
+  void rotateTo(float angle, vec3 axes);
 
   const mat4 getViewMatrix();
   const mat4 getProjectionMatrix();

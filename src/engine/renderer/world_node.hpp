@@ -31,7 +31,7 @@ public:
    * @param angle The angle to rotate
    * @param axes The axes to rotate on
    */
-  virtual void rotate(vec3 rotation);
+  virtual void rotate(float angle, vec3 axes);
 
   /**
    * @brief Set absolute rotation.
@@ -39,7 +39,7 @@ public:
    * @param angle The angle to rotate
    * @param axes The axes to rotate on
    */
-  virtual void rotateTo(vec3 rotation);
+  virtual void rotateTo(float angle, vec3 axes);
 
   /**
    * @brief Scale on individual axes.

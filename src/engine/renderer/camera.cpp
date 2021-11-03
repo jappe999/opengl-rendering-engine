@@ -37,18 +37,20 @@ double Camera::getYaw()
   return yaw;
 }
 
-void Camera::rotate(vec3 rotation)
+void Camera::rotate(float angle, vec3 axes)
 {
-  yaw += rotation.x;
-  pitch += rotation.y;
-  orientation.z += rotation.z;
+  std::cout << "Angle: " << angle << ", X: " << axes.x << ", Y: " << axes.y << ", Z: " << axes.z << std::endl
+            << "Yaw: " << yaw << ", Pitch: " << pitch << ", Roll: " << orientation.z << std::endl;
+  yaw += angle * axes.x;
+  pitch += angle * axes.y;
+  orientation.z += angle * axes.z;
 }
 
-void Camera::rotateTo(vec3 rotation)
+void Camera::rotateTo(float angle, vec3 axes)
 {
-  yaw = rotation.x;
-  pitch = rotation.y;
-  orientation.z = rotation.z;
+  yaw = angle * axes.x;
+  pitch = angle * axes.y;
+  orientation.z = angle * axes.z;
 }
 
 void Camera::updateVectors()

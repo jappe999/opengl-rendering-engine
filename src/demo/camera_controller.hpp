@@ -10,6 +10,8 @@ public:
   CameraController(Node *node) : Behavior(node)
   {
     camera = node->cast<Camera *>();
+    prevYaw = Input::getCursorPosition().x;
+    prevPitch = Input::getCursorPosition().y;
   }
 
   void onUpdate()
@@ -31,7 +33,7 @@ private:
 
   bool rotateZLeft = true;
 
-  double prevYaw = 0, prevPitch = 0;
+  float prevYaw = 0, prevPitch = 0;
 
   void move()
   {
@@ -80,8 +82,8 @@ private:
     static float maxY = 22.0f;
     vec2 position = Input::getCursorPosition();
 
-    double relativeYaw = (prevYaw - position.x) * movementSpeed * Application::getInstance().getDeltaTime();
-    double relativePitch = (prevPitch - position.y) * movementSpeed * Application::getInstance().getDeltaTime();
+    float relativeYaw = (prevYaw - position.x) * movementSpeed * Application::getInstance().getDeltaTime();
+    float relativePitch = (prevPitch - position.y) * movementSpeed * Application::getInstance().getDeltaTime();
     prevYaw = position.x;
     prevPitch = position.y;
 
@@ -93,7 +95,8 @@ private:
     if (nextPitch < -maxY)
       relativePitch -= nextPitch + maxY;
 
-    camera->rotate(vec3(-relativeYaw, relativePitch, 0.0));
+    camera->rotate(-relativeYaw, vec3(1.0f, 0.0f, 0.0f));
+    camera->rotate(relativePitch, vec3(0.0f, 1.0f, 0.0f));
   }
 };
 
