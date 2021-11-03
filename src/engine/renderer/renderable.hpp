@@ -11,7 +11,7 @@ using namespace glm;
 class Renderable : public WorldNode
 {
 public:
-  Renderable(Node *parent = nullptr) : WorldNode(parent) {}
+  Renderable(WorldNode *parent = nullptr) : WorldNode(parent) {}
   ~Renderable() = default;
 
   virtual void useShader(Shader *shader);

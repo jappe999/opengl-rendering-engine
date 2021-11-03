@@ -5,7 +5,7 @@
 class Cube : public Renderable
 {
 public:
-  Cube(Node *parent = nullptr) : Renderable(parent) {}
+  Cube(WorldNode *parent = nullptr) : Renderable(parent) {}
 
   void bind()
   {

@@ -39,8 +39,8 @@ double Camera::getYaw()
 
 void Camera::rotate(float angle, vec3 axes)
 {
-  std::cout << "Angle: " << angle << ", X: " << axes.x << ", Y: " << axes.y << ", Z: " << axes.z << std::endl
-            << "Yaw: " << yaw << ", Pitch: " << pitch << ", Roll: " << orientation.z << std::endl;
+  // std::cout << "Angle: " << angle << ", X: " << axes.x << ", Y: " << axes.y << ", Z: " << axes.z << std::endl
+  // << "Yaw: " << yaw << ", Pitch: " << pitch << ", Roll: " << orientation.z << std::endl;
   yaw += angle * axes.x;
   pitch += angle * axes.y;
   orientation.z += angle * axes.z;

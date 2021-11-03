@@ -10,7 +10,7 @@ void Renderable::bind()
 {
   shader->use();
 
-  // uniform_model = glGetUniformLocation(shader->id, "model");
+  uniform_model = glGetUniformLocation(shader->id, "model");
   uniform_view = glGetUniformLocation(shader->id, "view");
   uniform_proj = glGetUniformLocation(shader->id, "projection");
 }

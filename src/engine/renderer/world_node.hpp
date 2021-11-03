@@ -56,17 +56,17 @@ protected:
    * @brief Object position.
    *
    */
-  vec3 position;
+  vec3 position = vec3(1.0f);
 
   /**
    * @brief Object rotation.
    *
    */
-  vec4 rotation;
+  vec4 rotation = vec4(1.0f);
 
   /**
    * @brief Object scale.
    *
    */
-  vec3 scaling;
+  vec3 scaling = vec3(1.0f);
 };

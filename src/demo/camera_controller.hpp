@@ -7,7 +7,7 @@ using namespace glm;
 class CameraController : public Behavior
 {
 public:
-  CameraController(Node *node) : Behavior(node)
+  CameraController(WorldNode *node) : Behavior(node)
   {
     camera = node->cast<Camera *>();
     prevYaw = Input::getCursorPosition().x;

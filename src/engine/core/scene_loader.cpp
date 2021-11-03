@@ -13,7 +13,7 @@ Scene *SceneLoader::deserialize(std::string path)
 
   for (auto nodeConfig : config["nodes"])
   {
-    Node *node = NodeFactory::create(nodeConfig["type"].as<std::string>());
+    WorldNode *node = NodeFactory::create(nodeConfig["type"].as<std::string>())->cast<WorldNode *>();
 
     if (node->isDerivedFrom<Camera>() && nodeConfig["properties"]["main"])
     {
@@ -22,12 +22,14 @@ Scene *SceneLoader::deserialize(std::string path)
 
     if (nodeConfig["position"])
     {
-      // TODO: set initial position.
+      std::vector<float> position = nodeConfig["position"].as<std::vector<float>>();
+      node->cast<WorldNode *>()->translateTo(vec3(position[0], position[1], position[2]));
     }
 
     if (nodeConfig["rotation"])
     {
-      // TODO: set initial rotation.
+      std::vector<float> rotation = nodeConfig["rotation"].as<std::vector<float>>();
+      node->cast<WorldNode *>()->rotateTo(rotation[3], vec3(rotation[0], rotation[1], rotation[2]));
     }
 
     if (node->isDerivedFrom<Renderable>())
@@ -45,6 +47,9 @@ Scene *SceneLoader::deserialize(std::string path)
       Behavior *behavior = NodeFactory::create(script.as<std::string>(), node)
                                ->cast<Behavior *>();
       node->addBehavior(behavior);
+
+      std::cout << "Added script '" << script.as<std::string>() << "' to '"
+                << nodeConfig["type"].as<std::string>() << "'" << std::endl;
     }
 
     scene->addNode(node);
