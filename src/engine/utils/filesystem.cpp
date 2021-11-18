@@ -1,7 +1,12 @@
 #include <memory>
 #include <stdio.h>
+#include <limits.h>
 #include <iostream>
 #include <fstream>
+
+#ifdef __APPLE__
+#include <mach-o/dyld.h>
+#endif
 
 #include <engine/utils/filesystem.hpp>
 
@@ -19,14 +24,18 @@ string getexepath()
 
 #ifdef _WIN32
   GetModuleFileName(NULL, result, PATH_MAX);
+#elif __APPLE__
+  uint32_t size = sizeof(result);
+  _NSGetExecutablePath(result, &size);
 #elif __linux__
-  ssize_t count = readlink("/proc/self/exe", result, PATH_MAX);
+  readlink("/proc/self/exe", result, PATH_MAX);
 #endif
-  string str = string(result);
+  string path = string(result);
 
   // Strip the name of the executable
-  size_t positionOfExecutable = str.find("main");
-  return str.substr(0, positionOfExecutable);
+  size_t positionOfExecutable = path.find_last_of("\\/");
+
+  return path.substr(0, positionOfExecutable + 1);
 }
 
 string getPath(string relativePath)
