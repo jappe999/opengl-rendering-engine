@@ -1,6 +1,5 @@
-
-#include <libs/glad/glad.h>
-#include <engine/renderer/renderable.hpp>
+#include <ore/libs/glad/glad.h>
+#include <ore/engine/renderer/renderable.hpp>
 
 class Cube : public Renderable
 {

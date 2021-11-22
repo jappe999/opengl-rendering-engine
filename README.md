@@ -38,3 +38,10 @@ The resulting binary can be found in the `build/` folder. You can run it by exec
 ```
 ./build/main
 ```
+
+## To Do
+
+- Make the engine a separate library
+- Move the demo to a separate repository
+- Add support for Vulkan
+- Add GUI
