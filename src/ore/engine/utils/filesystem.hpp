@@ -2,6 +2,9 @@
 
 using namespace std;
 
-string getPath(string relativePath);
+namespace Ore::Utils
+{
+  string getPath(string relativePath);
 
-char *readFile(string path);
+  char *readFile(string path);
+} // namespace Ore::Utils

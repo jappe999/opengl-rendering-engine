@@ -3,62 +3,65 @@
 #include "ore/engine/renderer/renderable.hpp"
 #include "ore/engine/utils/filesystem.hpp"
 
-Scene *SceneLoader::deserialize(std::string path)
+namespace Ore
 {
-  Scene *scene = new Scene();
-
-  YAML::Node config = YAML::LoadFile(getPath(path));
-
-  std::cout << "Loading scene '" << config["name"] << "'" << std::endl;
-
-  for (auto nodeConfig : config["nodes"])
+  Scene *SceneLoader::deserialize(std::string path)
   {
-    WorldNode *node = NodeFactory::create(nodeConfig["type"].as<std::string>())->cast<WorldNode *>();
+    Scene *scene = new Scene();
 
-    if (node->isDerivedFrom<Camera>() && nodeConfig["properties"]["main"])
-    {
-      scene->setMainCamera(node->cast<Camera *>());
-    }
+    YAML::Node config = YAML::LoadFile(Utils::getPath(path));
 
-    if (nodeConfig["position"])
-    {
-      std::vector<float> position = nodeConfig["position"].as<std::vector<float>>();
-      node->cast<WorldNode *>()->translateTo(vec3(position[0], position[1], position[2]));
-    }
+    std::cout << "Loading scene '" << config["name"] << "'" << std::endl;
 
-    if (nodeConfig["rotation"])
+    for (auto nodeConfig : config["nodes"])
     {
-      std::vector<float> rotation = nodeConfig["rotation"].as<std::vector<float>>();
-      node->cast<WorldNode *>()->rotateTo(rotation[3], vec3(rotation[0], rotation[1], rotation[2]));
-    }
+      WorldNode *node = NodeFactory::create(nodeConfig["type"].as<std::string>())->cast<WorldNode *>();
 
-    if (node->isDerivedFrom<Renderable>())
-    {
-      Renderable *renderable = node->cast<Renderable *>();
-      for (auto shaderName : nodeConfig["shaders"])
+      if (node->isDerivedFrom<Camera>() && nodeConfig["properties"]["main"])
       {
-        renderable->useShader(Shader::acquire(shaderName.as<std::string>()));
-        renderable->bind();
+        scene->setMainCamera(node->cast<Camera *>());
       }
+
+      if (nodeConfig["position"])
+      {
+        std::vector<float> position = nodeConfig["position"].as<std::vector<float>>();
+        node->cast<WorldNode *>()->translateTo(vec3(position[0], position[1], position[2]));
+      }
+
+      if (nodeConfig["rotation"])
+      {
+        std::vector<float> rotation = nodeConfig["rotation"].as<std::vector<float>>();
+        node->cast<WorldNode *>()->rotateTo(rotation[3], vec3(rotation[0], rotation[1], rotation[2]));
+      }
+
+      if (node->isDerivedFrom<Renderable>())
+      {
+        Renderable *renderable = node->cast<Renderable *>();
+        for (auto shaderName : nodeConfig["shaders"])
+        {
+          renderable->useShader(Shader::acquire(shaderName.as<std::string>()));
+          renderable->bind();
+        }
+      }
+
+      for (auto script : nodeConfig["scripts"])
+      {
+        Behavior *behavior = NodeFactory::create(script.as<std::string>(), node)
+                                 ->cast<Behavior *>();
+        node->addBehavior(behavior);
+
+        std::cout << "Added script '" << script.as<std::string>() << "' to '"
+                  << nodeConfig["type"].as<std::string>() << "'" << std::endl;
+      }
+
+      scene->addNode(node);
     }
 
-    for (auto script : nodeConfig["scripts"])
-    {
-      Behavior *behavior = NodeFactory::create(script.as<std::string>(), node)
-                               ->cast<Behavior *>();
-      node->addBehavior(behavior);
-
-      std::cout << "Added script '" << script.as<std::string>() << "' to '"
-                << nodeConfig["type"].as<std::string>() << "'" << std::endl;
-    }
-
-    scene->addNode(node);
+    return scene;
   }
 
-  return scene;
-}
-
-std::string SceneLoader::serialize(const std::string path)
-{
-  return "";
-}
+  std::string SceneLoader::serialize(const std::string path)
+  {
+    return "";
+  }
+} // namespace Ore

@@ -8,27 +8,30 @@
 
 using namespace std;
 
-class Shader
+namespace Ore
 {
-public:
-  GLuint id = 0;
+  class Shader
+  {
+  public:
+    GLuint id = 0;
 
-  Shader();
-  Shader(string shaderName);
+    Shader();
+    Shader(string shaderName);
 
-  static Shader *acquire(string shaderName);
-  void use();
+    static Shader *acquire(string shaderName);
+    void use();
 
-  void setInt(const char *name, int value) const;
-  void setBool(const char *name, bool value) const;
-  void setFloat(const char *name, float value) const;
+    void setInt(const char *name, int value) const;
+    void setBool(const char *name, bool value) const;
+    void setFloat(const char *name, float value) const;
 
-private:
-  static map<string, Shader *> shaders;
+  private:
+    static map<string, Shader *> shaders;
 
-  static bool compiledStatus(GLint shaderID);
-  static GLuint makeVertexShader(const char *shaderSource);
-  static GLuint makeFragmentShader(const char *shaderSource);
-  static GLuint makeShaderProgram(GLuint vertexShaderID, GLuint fragmentShaderID);
-  static GLuint makeShaderProgram(string vertexShaderSource, string fragmentShaderSource);
-};
+    static bool compiledStatus(GLint shaderID);
+    static GLuint makeVertexShader(const char *shaderSource);
+    static GLuint makeFragmentShader(const char *shaderSource);
+    static GLuint makeShaderProgram(GLuint vertexShaderID, GLuint fragmentShaderID);
+    static GLuint makeShaderProgram(string vertexShaderSource, string fragmentShaderSource);
+  };
+} // namespace Ore

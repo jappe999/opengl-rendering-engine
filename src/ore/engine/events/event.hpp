@@ -5,15 +5,17 @@
 
 #define RE_BIND_EVENT_FN(fn) [this](auto &&...args) -> decltype(auto) { return this->fn(std::forward<decltype(args)>(args)...); }
 
-enum EventType
+namespace Ore::Events
 {
-  WindowResize,
-  MouseMove,
-  KeyPress,
-  KeyRepeat,
-  KeyRelease,
-  KeyChar,
-};
+  enum EventType
+  {
+    WindowResize,
+    MouseMove,
+    KeyPress,
+    KeyRepeat,
+    KeyRelease,
+    KeyChar,
+  };
 
 /** A convience macro for getting information about the event. */
 #define EVENT_CLASS_TYPE(type)                                                \
@@ -21,37 +23,38 @@ enum EventType
   virtual EventType getEventType() const override { return getStaticType(); } \
   virtual const char *getName() const override { return #type; }
 
-class Event
-{
-public:
-  virtual ~Event() = default;
-
-  bool handled;
-
-  virtual EventType getEventType() const = 0;
-  virtual const char *getName() const = 0;
-  virtual std::string toString() const { return getName(); }
-};
-
-class EventDispatcher
-{
-public:
-  EventDispatcher(Event &e) : event(e)
+  class Event
   {
-  }
+  public:
+    virtual ~Event() = default;
 
-  // F will be deduced by the compiler
-  template <typename T, typename F>
-  bool dispatch(const F &callback)
+    bool handled;
+
+    virtual EventType getEventType() const = 0;
+    virtual const char *getName() const = 0;
+    virtual std::string toString() const { return getName(); }
+  };
+
+  class EventDispatcher
   {
-    if (event.getEventType() == T::getStaticType())
+  public:
+    EventDispatcher(Event &e) : event(e)
     {
-      event.handled |= callback(static_cast<T &>(event));
-      return true;
     }
-    return false;
-  }
 
-private:
-  Event &event;
-};
+    // F will be deduced by the compiler
+    template <typename T, typename F>
+    bool dispatch(const F &callback)
+    {
+      if (event.getEventType() == T::getStaticType())
+      {
+        event.handled |= callback(static_cast<T &>(event));
+        return true;
+      }
+      return false;
+    }
+
+  private:
+    Event &event;
+  };
+} // namespace Ore

@@ -2,27 +2,30 @@
 
 #include "ore/engine/events/event.hpp"
 
-class WindowResizeEvent : public Event
+namespace Ore::Events
 {
-public:
-  WindowResizeEvent(int32_t width, int32_t height)
+  class WindowResizeEvent : public Event
   {
-    this->width = width;
-    this->height = height;
-  }
+  public:
+    WindowResizeEvent(int32_t width, int32_t height)
+    {
+      this->width = width;
+      this->height = height;
+    }
 
-  int32_t getWidth() { return width; }
-  int32_t getHeight() { return height; }
+    int32_t getWidth() { return width; }
+    int32_t getHeight() { return height; }
 
-  std::string toString() const override
-  {
-    std::stringstream ss;
-    ss << "WindowResizeEvent: " << width << ", " << height;
-    return ss.str();
-  }
+    std::string toString() const override
+    {
+      std::stringstream ss;
+      ss << "WindowResizeEvent: " << width << ", " << height;
+      return ss.str();
+    }
 
-  EVENT_CLASS_TYPE(WindowResize);
+    EVENT_CLASS_TYPE(WindowResize);
 
-private:
-  int32_t width, height;
-};
+  private:
+    int32_t width, height;
+  };
+} // namespace Ore::Events

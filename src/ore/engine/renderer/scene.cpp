@@ -3,38 +3,41 @@
 #include "ore/engine/renderer/shader.hpp"
 #include "ore/engine/renderer/renderable.hpp"
 
-void Scene::addNode(Node *node)
+namespace Ore
 {
-  nodes.emplace_back(std::move(node));
-}
-
-std::vector<Node *> Scene::getNodes() const
-{
-  return nodes;
-}
-
-void Scene::render(Camera *camera)
-{
-  for (auto node : nodes)
+  void Scene::addNode(Node *node)
   {
-    node->onUpdate();
-
-    // Validate that the node can be rendered.
-    if (node->isDerivedFrom<Renderable>())
-      dynamic_cast<Renderable *>(node)->render(camera);
+    nodes.emplace_back(std::move(node));
   }
-}
 
-Scene::Scene()
-{
-}
-
-Scene::~Scene()
-{
-  for (auto node : nodes)
+  std::vector<Node *> Scene::getNodes() const
   {
-    delete node;
-    node = nullptr;
+    return nodes;
   }
-  nodes.clear();
-}
+
+  void Scene::render(Camera *camera)
+  {
+    for (auto node : nodes)
+    {
+      node->onUpdate();
+
+      // Validate that the node can be rendered.
+      if (node->isDerivedFrom<Renderable>())
+        dynamic_cast<Renderable *>(node)->render(camera);
+    }
+  }
+
+  Scene::Scene()
+  {
+  }
+
+  Scene::~Scene()
+  {
+    for (auto node : nodes)
+    {
+      delete node;
+      node = nullptr;
+    }
+    nodes.clear();
+  }
+} // namespace Ore

@@ -5,7 +5,7 @@
 #include "camera_controller.hpp"
 #include "cube_controller.hpp"
 
-class MyApp : public Application
+class MyApp : public Ore::Application
 {
 public:
   void onStart() override

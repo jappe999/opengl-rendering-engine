@@ -4,14 +4,14 @@
 
 using namespace glm;
 
-class CubeController : public Behavior
+class CubeController : public Ore::Behavior
 {
 public:
-  CubeController(WorldNode *node) : Behavior(node) {}
+  CubeController(Ore::WorldNode *node) : Ore::Behavior(node) {}
 
   void onUpdate()
   {
-    node->translate(vec3(0.1, 0.0, 0.0) * Application::getInstance().getDeltaTime());
+    node->translate(vec3(0.1, 0.0, 0.0) * Ore::Application::getInstance().getDeltaTime());
   }
 };
 

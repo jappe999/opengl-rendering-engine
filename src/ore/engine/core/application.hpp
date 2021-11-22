@@ -6,45 +6,48 @@
 #include "ore/engine/renderer/scene.hpp"
 #include "ore/engine/core/window.hpp"
 
-class Application
+namespace Ore
 {
-public:
-  std::string title = "OpenGL Rendering Engine";
-
-  Application() : scene(nullptr), camera(nullptr)
+  class Application
   {
-    instance = this;
-  }
-  ~Application() {}
+  public:
+    std::string title = "OpenGL Rendering Engine";
 
-  static Application &getInstance() { return *instance; }
-  Window &getWindow() { return *window; }
-  float getDeltaTime() { return deltaTime; }
+    Application() : scene(nullptr), camera(nullptr)
+    {
+      instance = this;
+    }
+    ~Application() {}
 
-  void loadScene(std::string path);
-  void unloadCurrentScene();
+    static Application &getInstance() { return *instance; }
+    Window &getWindow() { return *window; }
+    float getDeltaTime() { return deltaTime; }
 
-  virtual void onStart() {}
-  virtual void onDestroy() {}
+    void loadScene(std::string path);
+    void unloadCurrentScene();
 
-  bool create(int32_t width, int32_t height, bool fullScreen = false);
-  void start();
-  void destroy();
+    virtual void onStart() {}
+    virtual void onDestroy() {}
 
-protected:
-  int32_t width, height;
-  bool fullScreen;
+    bool create(int32_t width, int32_t height, bool fullScreen = false);
+    void start();
+    void destroy();
 
-  Window *window;
-  Scene *scene;
-  Camera *camera;
+  protected:
+    int32_t width, height;
+    bool fullScreen;
 
-private:
-  void onEvent(Event &event);
+    Window *window;
+    Scene *scene;
+    Camera *camera;
 
-  bool hasStarted = false;
+  private:
+    void onEvent(Events::Event &event);
 
-  float lastFrameTime, deltaTime;
+    bool hasStarted = false;
 
-  static Application *instance;
-};
+    float lastFrameTime, deltaTime;
+
+    static Application *instance;
+  };
+} // namespace Ore
