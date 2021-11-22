@@ -1,6 +1,5 @@
 #include <glm/gtc/matrix_transform.hpp>
-#include <ore/engine/renderer/behavior.hpp>
-#include <ore/engine/core/input.hpp>
+#include <ore/engine.hpp>
 
 using namespace glm;
 
