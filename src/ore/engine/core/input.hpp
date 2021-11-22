@@ -2,10 +2,13 @@
 
 #include <glm/glm.hpp>
 
-class Input
+namespace Ore
 {
-public:
-  static bool isKeyPressed(int32_t key);
-  static bool isMouseButtonPressed(int32_t button);
-  static glm::vec2 getCursorPosition();
-};
+  class Input
+  {
+  public:
+    static bool isKeyPressed(int32_t key);
+    static bool isMouseButtonPressed(int32_t button);
+    static glm::vec2 getCursorPosition();
+  };
+} // namespace Ore

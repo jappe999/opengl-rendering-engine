@@ -8,25 +8,28 @@
 
 using namespace glm;
 
-class Renderable : public WorldNode
+namespace Ore
 {
-public:
-  Renderable(WorldNode *parent = nullptr) : WorldNode(parent) {}
-  ~Renderable() = default;
+  class Renderable : public WorldNode
+  {
+  public:
+    Renderable(WorldNode *parent = nullptr) : WorldNode(parent) {}
+    ~Renderable() = default;
 
-  virtual void useShader(Shader *shader);
+    virtual void useShader(Shader *shader);
 
-  virtual void bind();
-  virtual void render(Camera *camera);
+    virtual void bind();
+    virtual void render(Camera *camera);
 
-protected:
-  GLuint vao;
+  protected:
+    GLuint vao;
 
-  Shader *shader;
+    Shader *shader;
 
-  mat4 model = mat4(1.0f);
+    mat4 model = mat4(1.0f);
 
-  GLuint uniform_model,
-      uniform_view,
-      uniform_proj;
-};
+    GLuint uniform_model,
+        uniform_view,
+        uniform_proj;
+  };
+} // namespace Ore

@@ -1,14 +1,14 @@
 #include <ore/libs/glad/glad.h>
 #include <ore/engine/renderer/renderable.hpp>
 
-class Cube : public Renderable
+class Cube : public Ore::Renderable
 {
 public:
-  Cube(WorldNode *parent = nullptr) : Renderable(parent) {}
+  Cube(Ore::WorldNode *parent = nullptr) : Ore::Renderable(parent) {}
 
   void bind()
   {
-    Renderable::bind();
+    Ore::Renderable::bind();
 
     float vertices[] = {-1.0f, 1.0f, -1.0f,
                         -1.0f, -1.0f, -1.0f,
@@ -65,9 +65,9 @@ public:
     glEnableVertexAttribArray(0);
   }
 
-  void render(Camera *camera)
+  void render(Ore::Camera *camera)
   {
-    Renderable::render(camera);
+    Ore::Renderable::render(camera);
 
     glBindVertexArray(vao);
     glDrawArrays(GL_TRIANGLES, 0, 36);

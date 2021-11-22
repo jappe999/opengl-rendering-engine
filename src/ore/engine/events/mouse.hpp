@@ -2,23 +2,26 @@
 
 #include "ore/engine/events/event.hpp"
 
-class MouseMoveEvent : public Event
+namespace Ore::Events
 {
-public:
-  MouseMoveEvent(double x, double y) : X(x), Y(y) {}
-
-  double getX() { return X; }
-  double getY() { return Y; }
-
-  std::string toString() const override
+  class MouseMoveEvent : public Event
   {
-    std::stringstream ss;
-    ss << "MouseMoveEvent: " << X << ", " << Y;
-    return ss.str();
-  }
+  public:
+    MouseMoveEvent(double x, double y) : X(x), Y(y) {}
 
-  EVENT_CLASS_TYPE(MouseMove);
+    double getX() { return X; }
+    double getY() { return Y; }
 
-private:
-  double X, Y;
-};
+    std::string toString() const override
+    {
+      std::stringstream ss;
+      ss << "MouseMoveEvent: " << X << ", " << Y;
+      return ss.str();
+    }
+
+    EVENT_CLASS_TYPE(MouseMove);
+
+  private:
+    double X, Y;
+  };
+} // namespace Ore::Events

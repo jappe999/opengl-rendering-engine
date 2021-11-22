@@ -4,9 +4,12 @@
 #include "ore/engine/renderer/scene.hpp"
 #include "ore/engine/renderer/behavior.hpp"
 
-class SceneLoader
+namespace Ore
 {
-public:
-  static Scene *deserialize(std::string path);
-  static std::string serialize(const std::string path);
-};
+  class SceneLoader
+  {
+  public:
+    static Scene *deserialize(std::string path);
+    static std::string serialize(const std::string path);
+  };
+} // namespace Ore

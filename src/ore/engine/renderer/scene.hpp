@@ -6,26 +6,29 @@
 #include "ore/engine/renderer/node.hpp"
 #include "ore/engine/renderer/camera.hpp"
 
-class SceneLoader;
-
-class Scene
+namespace Ore
 {
-public:
-  Scene();
-  ~Scene();
+  class SceneLoader;
 
-  void render(Camera *camera);
+  class Scene
+  {
+  public:
+    Scene();
+    ~Scene();
 
-  void addNode(Node *node);
-  std::vector<Node *> getNodes() const;
+    void render(Camera *camera);
 
-  Camera *getMainCamera() { return mainCamera; }
+    void addNode(Node *node);
+    std::vector<Node *> getNodes() const;
 
-private:
-  std::vector<Node *> nodes;
-  Camera *mainCamera;
+    Camera *getMainCamera() { return mainCamera; }
 
-private:
-  void setMainCamera(Camera *camera) { mainCamera = camera; }
-  friend SceneLoader;
-};
+  private:
+    std::vector<Node *> nodes;
+    Camera *mainCamera;
+
+  private:
+    void setMainCamera(Camera *camera) { mainCamera = camera; }
+    friend class SceneLoader;
+  };
+} // namespace Ore

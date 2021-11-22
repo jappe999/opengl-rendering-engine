@@ -1,131 +1,134 @@
 #include "ore/engine/renderer/shader.hpp"
 #include "ore/engine/utils/filesystem.hpp"
 
-map<string, Shader *> Shader::shaders;
-
-Shader::Shader()
+namespace Ore
 {
-  id = 0;
-}
+  map<string, Shader *> Shader::shaders;
 
-Shader::Shader(string shaderName)
-{
-  Shader *&shader = shaders[shaderName];
-
-  if (shader != nullptr)
+  Shader::Shader()
   {
-    id = shader->id;
+    id = 0;
   }
-  else
+
+  Shader::Shader(string shaderName)
   {
-    string vertexShaderSource = getPath("assets/shaders/" + shaderName + ".vert");
-    string fragmentShaderSource = getPath("assets/shaders/" + shaderName + ".frag");
+    Shader *&shader = shaders[shaderName];
 
-    id = Shader::makeShaderProgram(vertexShaderSource, fragmentShaderSource);
-    shader = this;
+    if (shader != nullptr)
+    {
+      id = shader->id;
+    }
+    else
+    {
+      string vertexShaderSource = Utils::getPath("assets/shaders/" + shaderName + ".vert");
+      string fragmentShaderSource = Utils::getPath("assets/shaders/" + shaderName + ".frag");
+
+      id = Shader::makeShaderProgram(vertexShaderSource, fragmentShaderSource);
+      shader = this;
+    }
   }
-}
 
-void Shader::use()
-{
-  if (id != 0)
-    glUseProgram(id);
-}
-
-Shader *Shader::acquire(string shaderName)
-{
-  Shader *&shader = shaders[shaderName];
-
-  if (shader == nullptr)
-    shader = new Shader(shaderName);
-
-  return shader;
-}
-
-void Shader::setInt(const char *name, int value) const
-{
-  if (id != 0)
-    glUniform1i(glGetUniformLocation(id, name), value);
-}
-
-void Shader::setBool(const char *name, bool value) const
-{
-  if (id != 0)
-    glUniform1i(glGetUniformLocation(id, name), (int)value);
-}
-
-void Shader::setFloat(const char *name, float value) const
-{
-  if (id != 0)
-    glUniform1f(glGetUniformLocation(id, name), value);
-}
-
-bool Shader::compiledStatus(GLint shaderID)
-{
-  GLint compiled = 0;
-  glGetShaderiv(shaderID, GL_COMPILE_STATUS, &compiled);
-  if (compiled)
+  void Shader::use()
   {
-    return true;
+    if (id != 0)
+      glUseProgram(id);
   }
-  else
+
+  Shader *Shader::acquire(string shaderName)
   {
-    GLint logLength;
-    glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &logLength);
-    char *msgBuffer = new char[logLength];
-    glGetShaderInfoLog(shaderID, logLength, NULL, msgBuffer);
-    printf("%s\n", msgBuffer);
-    delete (msgBuffer);
-    return false;
+    Shader *&shader = shaders[shaderName];
+
+    if (shader == nullptr)
+      shader = new Shader(shaderName);
+
+    return shader;
   }
-}
 
-GLuint Shader::makeVertexShader(const char *shaderSource)
-{
-  GLuint vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
-  glShaderSource(vertexShaderID, 1, (const GLchar **)&shaderSource, NULL);
-  glCompileShader(vertexShaderID);
-  bool compiledCorrectly = compiledStatus(vertexShaderID);
+  void Shader::setInt(const char *name, int value) const
+  {
+    if (id != 0)
+      glUniform1i(glGetUniformLocation(id, name), value);
+  }
 
-  if (compiledCorrectly)
-    return vertexShaderID;
+  void Shader::setBool(const char *name, bool value) const
+  {
+    if (id != 0)
+      glUniform1i(glGetUniformLocation(id, name), (int)value);
+  }
 
-  return -1;
-}
+  void Shader::setFloat(const char *name, float value) const
+  {
+    if (id != 0)
+      glUniform1f(glGetUniformLocation(id, name), value);
+  }
 
-GLuint Shader::makeFragmentShader(const char *shaderSource)
-{
-  GLuint fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
-  glShaderSource(fragmentShaderID, 1, (const GLchar **)&shaderSource, NULL);
-  glCompileShader(fragmentShaderID);
-  bool compiledCorrectly = compiledStatus(fragmentShaderID);
+  bool Shader::compiledStatus(GLint shaderID)
+  {
+    GLint compiled = 0;
+    glGetShaderiv(shaderID, GL_COMPILE_STATUS, &compiled);
+    if (compiled)
+    {
+      return true;
+    }
+    else
+    {
+      GLint logLength;
+      glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &logLength);
+      char *msgBuffer = new char[logLength];
+      glGetShaderInfoLog(shaderID, logLength, NULL, msgBuffer);
+      printf("%s\n", msgBuffer);
+      delete (msgBuffer);
+      return false;
+    }
+  }
 
-  if (compiledCorrectly)
-    return fragmentShaderID;
+  GLuint Shader::makeVertexShader(const char *shaderSource)
+  {
+    GLuint vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(vertexShaderID, 1, (const GLchar **)&shaderSource, NULL);
+    glCompileShader(vertexShaderID);
+    bool compiledCorrectly = compiledStatus(vertexShaderID);
 
-  return -1;
-}
+    if (compiledCorrectly)
+      return vertexShaderID;
 
-GLuint Shader::makeShaderProgram(GLuint vertexShaderID, GLuint fragmentShaderID)
-{
-  GLuint shaderID = glCreateProgram();
-  glAttachShader(shaderID, vertexShaderID);
-  glAttachShader(shaderID, fragmentShaderID);
-  glLinkProgram(shaderID);
-  return shaderID;
-}
+    return -1;
+  }
 
-GLuint Shader::makeShaderProgram(string vertexShaderPath, string fragmentShaderPath)
-{
-  cout << "Compiling shader " << vertexShaderPath << endl;
-  char *vertexShaderContent = readFile(vertexShaderPath);
-  GLuint vertexShaderId = Shader::makeVertexShader(vertexShaderContent);
-  delete[] vertexShaderContent;
+  GLuint Shader::makeFragmentShader(const char *shaderSource)
+  {
+    GLuint fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(fragmentShaderID, 1, (const GLchar **)&shaderSource, NULL);
+    glCompileShader(fragmentShaderID);
+    bool compiledCorrectly = compiledStatus(fragmentShaderID);
 
-  cout << "Compiling shader " << fragmentShaderPath << endl;
-  char *fragmentShaderContent = readFile(fragmentShaderPath);
-  GLuint fragmentShaderId = Shader::makeFragmentShader(fragmentShaderContent);
-  delete[] fragmentShaderContent;
+    if (compiledCorrectly)
+      return fragmentShaderID;
 
-  return Shader::makeShaderProgram(vertexShaderId, fragmentShaderId);
-}
+    return -1;
+  }
+
+  GLuint Shader::makeShaderProgram(GLuint vertexShaderID, GLuint fragmentShaderID)
+  {
+    GLuint shaderID = glCreateProgram();
+    glAttachShader(shaderID, vertexShaderID);
+    glAttachShader(shaderID, fragmentShaderID);
+    glLinkProgram(shaderID);
+    return shaderID;
+  }
+
+  GLuint Shader::makeShaderProgram(string vertexShaderPath, string fragmentShaderPath)
+  {
+    cout << "Compiling shader " << vertexShaderPath << endl;
+    char *vertexShaderContent = Utils::readFile(vertexShaderPath);
+    GLuint vertexShaderId = Shader::makeVertexShader(vertexShaderContent);
+    delete[] vertexShaderContent;
+
+    cout << "Compiling shader " << fragmentShaderPath << endl;
+    char *fragmentShaderContent = Utils::readFile(fragmentShaderPath);
+    GLuint fragmentShaderId = Shader::makeFragmentShader(fragmentShaderContent);
+    delete[] fragmentShaderContent;
+
+    return Shader::makeShaderProgram(vertexShaderId, fragmentShaderId);
+  }
+} // namespace Ore

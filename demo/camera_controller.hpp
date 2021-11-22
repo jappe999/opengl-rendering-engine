@@ -4,14 +4,14 @@
 
 using namespace glm;
 
-class CameraController : public Behavior
+class CameraController : public Ore::Behavior
 {
 public:
-  CameraController(WorldNode *node) : Behavior(node)
+  CameraController(Ore::WorldNode *node) : Behavior(node)
   {
-    camera = node->cast<Camera *>();
-    prevYaw = Input::getCursorPosition().x;
-    prevPitch = Input::getCursorPosition().y;
+    camera = node->cast<Ore::Camera *>();
+    prevYaw = Ore::Input::getCursorPosition().x;
+    prevPitch = Ore::Input::getCursorPosition().y;
   }
 
   void onUpdate()
@@ -20,14 +20,14 @@ public:
     rotate();
   }
 
-  bool onWindowResize(WindowResizeEvent &event) override
+  bool onWindowResize(Ore::Events::WindowResizeEvent &event) override
   {
     camera->setAspectRatio((float)event.getWidth() / event.getHeight());
     return true;
   }
 
 private:
-  Camera *camera;
+  Ore::Camera *camera;
 
   float movementSpeed = 2.0f;
 
@@ -37,20 +37,20 @@ private:
 
   void move()
   {
-    float speed = movementSpeed * Application::getInstance().getDeltaTime();
+    float speed = movementSpeed * Ore::Application::getInstance().getDeltaTime();
 
     float forward = 0;
-    if (Input::isKeyPressed(GLFW_KEY_W) || Input::isKeyPressed(GLFW_KEY_UP))
+    if (Ore::Input::isKeyPressed(GLFW_KEY_W) || Ore::Input::isKeyPressed(GLFW_KEY_UP))
       forward = speed;
-    else if (Input::isKeyPressed(GLFW_KEY_S) || Input::isKeyPressed(GLFW_KEY_DOWN))
+    else if (Ore::Input::isKeyPressed(GLFW_KEY_S) || Ore::Input::isKeyPressed(GLFW_KEY_DOWN))
       forward = -speed;
 
     camera->translate(camera->getTargetFront() * forward);
 
     float right = 0;
-    if (Input::isKeyPressed(GLFW_KEY_A) || Input::isKeyPressed(GLFW_KEY_LEFT))
+    if (Ore::Input::isKeyPressed(GLFW_KEY_A) || Ore::Input::isKeyPressed(GLFW_KEY_LEFT))
       right = -speed;
-    else if (Input::isKeyPressed(GLFW_KEY_D) || Input::isKeyPressed(GLFW_KEY_RIGHT))
+    else if (Ore::Input::isKeyPressed(GLFW_KEY_D) || Ore::Input::isKeyPressed(GLFW_KEY_RIGHT))
       right = speed;
 
     camera->translate(camera->getTargetRight() * right);
@@ -80,10 +80,10 @@ private:
   void rotate()
   {
     static float maxY = 22.0f;
-    vec2 position = Input::getCursorPosition();
+    vec2 position = Ore::Input::getCursorPosition();
 
-    float relativeYaw = (prevYaw - position.x) * movementSpeed * Application::getInstance().getDeltaTime();
-    float relativePitch = (prevPitch - position.y) * movementSpeed * Application::getInstance().getDeltaTime();
+    float relativeYaw = (prevYaw - position.x) * movementSpeed * Ore::Application::getInstance().getDeltaTime();
+    float relativePitch = (prevPitch - position.y) * movementSpeed * Ore::Application::getInstance().getDeltaTime();
     prevYaw = position.x;
     prevPitch = position.y;
 

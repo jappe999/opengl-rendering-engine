@@ -5,29 +5,32 @@
 #include "ore/engine/events/key.hpp"
 #include "ore/engine/renderer/world_node.hpp"
 
-class Behavior : public Node
+namespace Ore
 {
-public:
-  Behavior(WorldNode *node) : Node(node), node(node) {}
-  ~Behavior() = default;
-
-  void onEvent(Event &event)
+  class Behavior : public Node
   {
-    EventDispatcher dispatcher(event);
-    dispatcher.dispatch<WindowResizeEvent>(RE_BIND_EVENT_FN(onWindowResize));
-    dispatcher.dispatch<MouseMoveEvent>(RE_BIND_EVENT_FN(onMouseMove));
-    dispatcher.dispatch<KeyPressEvent>(RE_BIND_EVENT_FN(onKeyPress));
-    dispatcher.dispatch<KeyRepeatEvent>(RE_BIND_EVENT_FN(onKeyRepeat));
-    dispatcher.dispatch<KeyReleaseEvent>(RE_BIND_EVENT_FN(onKeyRelease));
-    dispatcher.dispatch<KeyCharEvent>(RE_BIND_EVENT_FN(onKeyChar));
-  }
-  virtual bool onWindowResize(WindowResizeEvent &event) { return false; }
-  virtual bool onMouseMove(MouseMoveEvent &event) { return false; }
-  virtual bool onKeyPress(KeyPressEvent &event) { return false; }
-  virtual bool onKeyRepeat(KeyRepeatEvent &event) { return false; }
-  virtual bool onKeyRelease(KeyReleaseEvent &event) { return false; }
-  virtual bool onKeyChar(KeyCharEvent &event) { return false; }
+  public:
+    Behavior(WorldNode *node) : Node(node), node(node) {}
+    ~Behavior() = default;
 
-protected:
-  WorldNode *node;
-};
+    void onEvent(Events::Event &event)
+    {
+      Events::EventDispatcher dispatcher(event);
+      dispatcher.dispatch<Events::WindowResizeEvent>(RE_BIND_EVENT_FN(onWindowResize));
+      dispatcher.dispatch<Events::MouseMoveEvent>(RE_BIND_EVENT_FN(onMouseMove));
+      dispatcher.dispatch<Events::KeyPressEvent>(RE_BIND_EVENT_FN(onKeyPress));
+      dispatcher.dispatch<Events::KeyRepeatEvent>(RE_BIND_EVENT_FN(onKeyRepeat));
+      dispatcher.dispatch<Events::KeyReleaseEvent>(RE_BIND_EVENT_FN(onKeyRelease));
+      dispatcher.dispatch<Events::KeyCharEvent>(RE_BIND_EVENT_FN(onKeyChar));
+    }
+    virtual bool onWindowResize(Events::WindowResizeEvent &event) { return false; }
+    virtual bool onMouseMove(Events::MouseMoveEvent &event) { return false; }
+    virtual bool onKeyPress(Events::KeyPressEvent &event) { return false; }
+    virtual bool onKeyRepeat(Events::KeyRepeatEvent &event) { return false; }
+    virtual bool onKeyRelease(Events::KeyReleaseEvent &event) { return false; }
+    virtual bool onKeyChar(Events::KeyCharEvent &event) { return false; }
+
+  protected:
+    WorldNode *node;
+  };
+} // namespace Ore
