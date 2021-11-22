@@ -1,6 +1,6 @@
-#include <engine/renderer/node.hpp>
-#include <engine/renderer/renderable.hpp>
-#include <engine/renderer/behavior.hpp>
+#include "ore/engine/renderer/node.hpp"
+#include "ore/engine/renderer/renderable.hpp"
+#include "ore/engine/renderer/behavior.hpp"
 
 ORE_REGISTER_NODE(Node, "ore_node");
 

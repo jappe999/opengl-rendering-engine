@@ -2,8 +2,8 @@
 
 #include <vector>
 #include <iostream>
-#include <engine/events/event.hpp>
-#include <engine/core/node_factory.hpp>
+#include "ore/engine/events/event.hpp"
+#include "ore/engine/core/node_factory.hpp"
 
 class Behavior;
 

@@ -1,7 +1,7 @@
 #include <iostream>
-#include <engine/renderer/scene.hpp>
-#include <engine/renderer/shader.hpp>
-#include <engine/renderer/renderable.hpp>
+#include "ore/engine/renderer/scene.hpp"
+#include "ore/engine/renderer/shader.hpp"
+#include "ore/engine/renderer/renderable.hpp"
 
 void Scene::addNode(Node *node)
 {

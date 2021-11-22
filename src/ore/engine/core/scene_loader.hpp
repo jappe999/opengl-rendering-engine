@@ -1,8 +1,8 @@
 #pragma once
 
 #include <string>
-#include <engine/renderer/scene.hpp>
-#include <engine/renderer/behavior.hpp>
+#include "ore/engine/renderer/scene.hpp"
+#include "ore/engine/renderer/behavior.hpp"
 
 class SceneLoader
 {

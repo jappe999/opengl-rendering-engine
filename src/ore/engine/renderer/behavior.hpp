@@ -1,9 +1,9 @@
 #pragma once
 
-#include <engine/events/mouse.hpp>
-#include <engine/events/window.hpp>
-#include <engine/events/key.hpp>
-#include <engine/renderer/world_node.hpp>
+#include "ore/engine/events/mouse.hpp"
+#include "ore/engine/events/window.hpp"
+#include "ore/engine/events/key.hpp"
+#include "ore/engine/renderer/world_node.hpp"
 
 class Behavior : public Node
 {

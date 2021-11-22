@@ -1,7 +1,7 @@
 #pragma once
 
 #include <glm/gtc/matrix_transform.hpp>
-#include <engine/renderer/world_node.hpp>
+#include "ore/engine/renderer/world_node.hpp"
 
 using namespace glm;
 

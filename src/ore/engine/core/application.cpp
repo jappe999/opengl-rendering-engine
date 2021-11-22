@@ -1,5 +1,5 @@
-#include <engine/core/application.hpp>
-#include <engine/core/scene_loader.hpp>
+#include "ore/engine/core/application.hpp"
+#include "ore/engine/core/scene_loader.hpp"
 
 Application *Application::instance = nullptr;
 

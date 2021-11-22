@@ -3,8 +3,8 @@
 #include <string>
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
-#include <engine/renderer/scene.hpp>
-#include <engine/core/window.hpp>
+#include "ore/engine/renderer/scene.hpp"
+#include "ore/engine/core/window.hpp"
 
 class Application
 {

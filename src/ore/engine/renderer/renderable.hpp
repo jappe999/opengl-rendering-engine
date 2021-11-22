@@ -1,10 +1,10 @@
 #pragma once
 
 #include <memory>
-#include <libs/glad/glad.h>
-#include <engine/renderer/shader.hpp>
-#include <engine/renderer/world_node.hpp>
-#include <engine/renderer/camera.hpp>
+#include <ore/libs/glad/glad.h>
+#include "ore/engine/renderer/shader.hpp"
+#include "ore/engine/renderer/world_node.hpp"
+#include "ore/engine/renderer/camera.hpp"
 
 using namespace glm;
 
