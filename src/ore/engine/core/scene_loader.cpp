@@ -1,7 +1,7 @@
 #include <yaml-cpp/yaml.h>
-#include <engine/core/scene_loader.hpp>
-#include <engine/renderer/renderable.hpp>
-#include <engine/utils/filesystem.hpp>
+#include "ore/engine/core/scene_loader.hpp"
+#include "ore/engine/renderer/renderable.hpp"
+#include "ore/engine/utils/filesystem.hpp"
 
 Scene *SceneLoader::deserialize(std::string path)
 {

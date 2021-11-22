@@ -3,8 +3,8 @@
 #include <memory>
 #include <vector>
 #include <glm/gtc/matrix_transform.hpp>
-#include <engine/renderer/node.hpp>
-#include <engine/renderer/camera.hpp>
+#include "ore/engine/renderer/node.hpp"
+#include "ore/engine/renderer/camera.hpp"
 
 class SceneLoader;
 

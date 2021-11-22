@@ -3,9 +3,9 @@
 #include <iostream>
 #include <string>
 #include <functional>
-#include <libs/glad/glad.h>
+#include <ore/libs/glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <engine/events/event.hpp>
+#include "ore/engine/events/event.hpp"
 
 class Window
 {
