@@ -1,5 +1,5 @@
 #include <ore/libs/glad/glad.h>
-#include <ore/engine/renderer/renderable.hpp>
+#include <ore/engine.hpp>
 
 class Cube : public Ore::Renderable
 {
