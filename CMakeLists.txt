@@ -20,4 +20,4 @@ target_link_libraries(ore PRIVATE glfw)
 find_package(yaml-cpp CONFIG REQUIRED)
 target_link_libraries(ore PRIVATE yaml-cpp)
 
-file(COPY assets DESTINATION .)
+file(COPY demo/assets DESTINATION .)
