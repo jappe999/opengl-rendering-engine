@@ -41,7 +41,7 @@ The resulting binary can be found in the `build/` folder. You can run it by exec
 
 ## To Do
 
-- Make the engine a separate library
-- Move the demo to a separate repository
-- Add support for Vulkan
-- Add GUI
+- [x] Make the engine a separate library
+- [ ] Add GUI components
+- [ ] Move the demo to a separate repository
+- [ ] Add support for Vulkan
