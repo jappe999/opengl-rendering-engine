@@ -8,6 +8,7 @@ void Application::loadScene(std::string path)
   unloadCurrentScene();
   scene = SceneLoader::deserialize(path);
   camera = scene->getMainCamera();
+  camera->setAspectRatio((float)window->data.width / window->data.height);
 }
 
 void Application::unloadCurrentScene()
@@ -66,16 +67,7 @@ void Application::start()
     /* Poll for and process events */
     glfwPollEvents();
 
-    glClearColor(0, 0, 0, 1.0);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    float time = (float)glfwGetTime();
-    deltaTime = time - lastFrameTime;
-    lastFrameTime = time;
-
-    scene->render(camera);
-
-    glfwSwapBuffers(window->getNative());
+    render();
   }
 
   destroy();
@@ -91,8 +83,35 @@ void Application::destroy()
 
 void Application::onEvent(Event &event)
 {
+  EventDispatcher dispatcher(event);
+  dispatcher.dispatch<WindowResizeEvent>(RE_BIND_EVENT_FN(onWindowResize));
+
   auto nodes = scene->getNodes();
 
   for (auto &node : nodes)
     node->onEvent(event);
+}
+
+bool Application::onWindowResize(WindowResizeEvent &event)
+{
+  // Fix up the viewport to maintain aspect ratio.
+  glViewport(0, 0, event.getWidth(), event.getHeight());
+
+  render();
+
+  return true;
+}
+
+void Application::render()
+{
+  glClearColor(0, 0, 0, 1.0);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  float time = (float)glfwGetTime();
+  deltaTime = time - lastFrameTime;
+  lastFrameTime = time;
+
+  scene->render(camera);
+
+  glfwSwapBuffers(window->getNative());
 }

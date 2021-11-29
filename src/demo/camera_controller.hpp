@@ -14,7 +14,7 @@ public:
     prevPitch = Input::getCursorPosition().y;
   }
 
-  void onUpdate()
+  void onUpdate() override
   {
     move();
     rotate();
@@ -23,6 +23,11 @@ public:
   bool onWindowResize(WindowResizeEvent &event) override
   {
     camera->setAspectRatio((float)event.getWidth() / event.getHeight());
+
+    vec2 position = Input::getCursorPosition();
+    prevYaw = position.x;
+    prevPitch = position.y;
+
     return true;
   }
 
@@ -33,7 +38,7 @@ private:
 
   bool rotateZLeft = true;
 
-  float prevYaw = 0, prevPitch = 0;
+  float prevYaw, prevPitch;
 
   void move()
   {
@@ -81,6 +86,11 @@ private:
   {
     static float maxY = 22.0f;
     vec2 position = Input::getCursorPosition();
+
+    if (!prevYaw)
+      prevYaw = position.x;
+    if (!prevPitch)
+      prevPitch = position.y;
 
     float relativeYaw = (prevYaw - position.x) * movementSpeed * Application::getInstance().getDeltaTime();
     float relativePitch = (prevPitch - position.y) * movementSpeed * Application::getInstance().getDeltaTime();

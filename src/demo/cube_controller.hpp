@@ -9,7 +9,7 @@ class CubeController : public Behavior
 public:
   CubeController(WorldNode *node) : Behavior(node) {}
 
-  void onUpdate()
+  void onUpdate() override
   {
     node->translate(vec3(0.1, 0.0, 0.0) * Application::getInstance().getDeltaTime());
   }

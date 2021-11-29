@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 #include <engine/renderer/scene.hpp>
 #include <engine/core/window.hpp>
+#include <engine/events/window.hpp>
 
 class Application
 {
@@ -41,6 +42,8 @@ protected:
 
 private:
   void onEvent(Event &event);
+  bool onWindowResize(WindowResizeEvent &event);
+  void render();
 
   bool hasStarted = false;
 

@@ -48,12 +48,10 @@ bool Window::createContext()
   // glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
   glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
 
-  glfwSetWindowSizeCallback(
+  glfwSetFramebufferSizeCallback(
       window,
       [](GLFWwindow *window, int32_t width, int32_t height)
       {
-        glViewport(0, 0, width, height); // fix up the viewport to maintain aspect ratio
-
         WindowData data = *(WindowData *)glfwGetWindowUserPointer(window);
         data.width = width;
         data.height = height;

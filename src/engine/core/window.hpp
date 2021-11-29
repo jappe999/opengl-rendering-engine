@@ -30,6 +30,7 @@ protected:
   };
 
   WindowData data;
+  friend class Application;
 
   GLFWwindow *window;
 };
