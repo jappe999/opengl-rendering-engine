@@ -1,29 +1,10 @@
-#include <memory>
-#include <iostream>
-#include <ore/engine.hpp>
-#include "cube.hpp"
-#include "camera_controller.hpp"
-#include "cube_controller.hpp"
+#include "demo.hpp"
 
-class MyApp : public Ore::Application
+int main(int argc, char **argv)
 {
-public:
-  void onStart() override
-  {
-    loadScene("assets/scenes/empty-void-with-cube.yml");
-  }
+  DerivedApplication app;
 
-  void onDestroy() override
-  {
-    cout << "See you soon!" << endl;
-  }
-};
-
-int main()
-{
-  MyApp app;
-
-  if (app.create(480, 360))
+  if (app.create(480, 360, true))
     app.start();
 
   return 0;

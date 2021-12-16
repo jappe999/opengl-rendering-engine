@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 #include <functional>
-#include <ore/libs/glad/glad.h>
+#include "ore/libs/glad/glad.h"
 #include <GLFW/glfw3.h>
 #include "ore/engine/events/event.hpp"
 
