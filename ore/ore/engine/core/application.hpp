@@ -12,9 +12,10 @@ namespace Ore
   class Application
   {
   public:
-    std::string title = "OpenGL Rendering Engine";
+    std::string title;
 
-    Application() : scene(nullptr), camera(nullptr)
+    Application(std::string _title = "OpenGL Rendering Engine - Ore")
+        : title(_title), scene(nullptr), camera(nullptr)
     {
       instance = this;
     }
@@ -31,8 +32,9 @@ namespace Ore
     virtual void onDestroy() {}
 
     bool create(int32_t width, int32_t height, bool fullScreen = false);
+    friend int main(int argc, char **argv);
     void start();
-    void destroy();
+    friend int main(int argc, char **argv);
 
   protected:
     int32_t width, height;
@@ -43,6 +45,8 @@ namespace Ore
     Camera *camera;
 
   private:
+    void destroy();
+
     void onEvent(Events::Event &event);
     bool onWindowResize(Events::WindowResizeEvent &event);
     void render();

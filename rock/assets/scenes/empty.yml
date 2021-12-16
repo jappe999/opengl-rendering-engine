@@ -1,0 +1,6 @@
+name: 'Empty scene'
+
+nodes:
+  - type: ore_camera
+    properties:
+      main: true
