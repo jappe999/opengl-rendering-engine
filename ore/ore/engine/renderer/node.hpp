@@ -14,7 +14,12 @@ namespace Ore
   {
   public:
     Node() {}
-    ~Node() {}
+    ~Node();
+
+    /**
+     * @brief Callback after adding to the list of children.
+     */
+    virtual void onStart() {}
 
     /**
      * @brief Callback for frame update.
@@ -46,7 +51,7 @@ namespace Ore
     void addChild(Node *child);
     std::vector<Node *> getChildren();
 
-  private:
+  protected:
     Node *parent;
     std::vector<Node *> children;
   };

@@ -13,14 +13,6 @@ namespace Ore
   class Scene : public Node
   {
   public:
-    Scene() {}
-    ~Scene();
-
-    void render(Camera *camera);
-
-    void addNode(WorldNode *node);
-    std::vector<WorldNode *> getNodes() const;
-
     Camera *getMainCamera() { return mainCamera; }
 
   private:

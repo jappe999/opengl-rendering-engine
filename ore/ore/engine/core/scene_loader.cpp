@@ -53,7 +53,7 @@ namespace Ore
                   << nodeConfig["type"].as<std::string>() << "'" << std::endl;
       }
 
-      scene->addNode(node);
+      scene->addChild(node);
     }
 
     return scene;

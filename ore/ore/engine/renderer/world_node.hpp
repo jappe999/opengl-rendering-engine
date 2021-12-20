@@ -15,6 +15,9 @@ namespace Ore
     WorldNode() {}
     ~WorldNode();
 
+    void onUpdate() override;
+    void onEvent(Events::Event &event) override;
+
     /**
      * @brief Add a bevavior to control this node.
      */

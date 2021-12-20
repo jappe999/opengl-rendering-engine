@@ -29,8 +29,5 @@ namespace Ore
     virtual bool onKeyRepeat(Events::KeyRepeatEvent &event) { return false; }
     virtual bool onKeyRelease(Events::KeyReleaseEvent &event) { return false; }
     virtual bool onKeyChar(Events::KeyCharEvent &event) { return false; }
-
-  protected:
-    WorldNode *node;
   };
 } // namespace Ore

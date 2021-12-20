@@ -6,6 +6,16 @@ ORE_REGISTER_NODE(Ore::Node, "ore_node");
 
 namespace Ore
 {
+  Node::~Node()
+  {
+    for (auto child : children)
+    {
+      delete child;
+      child = nullptr;
+    }
+    children.clear();
+  }
+
   void Node::onUpdate()
   {
     for (auto child : children)
@@ -21,13 +31,18 @@ namespace Ore
   void Node::render(Camera *camera)
   {
     for (auto child : children)
-      child->render(camera);
+    {
+      // Validate that the child can be rendered.
+      if (child->isDerivedFrom<Renderable>())
+        dynamic_cast<Renderable *>(child)->render(camera);
+    }
   }
 
   void Node::addChild(Node *child)
   {
     child->setParent(this);
     children.emplace_back(child);
+    child->onStart();
   }
 
   std::vector<Node *> Node::getChildren()
