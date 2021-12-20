@@ -10,6 +10,13 @@ public:
   {
   }
 
+  void onStart() override
+  {
+    camera = parent->cast<Ore::Camera *>();
+    prevYaw = Ore::Input::getCursorPosition().x;
+    prevPitch = Ore::Input::getCursorPosition().y;
+  }
+
   void onUpdate() override
   {
     move();

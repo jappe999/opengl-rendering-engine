@@ -73,6 +73,9 @@ namespace Ore
 
     onStart();
 
+    for (auto node : nodes)
+      node->onStart();
+
     glfwSwapInterval(1);
 
     /* Loop until the user closes the window */
@@ -100,9 +103,7 @@ namespace Ore
     Events::EventDispatcher dispatcher(event);
     dispatcher.dispatch<Events::WindowResizeEvent>(RE_BIND_EVENT_FN(onWindowResize));
 
-    auto nodes = scene->getNodes();
-
-    for (auto &node : nodes)
+    for (auto node : nodes)
       node->onEvent(event);
   }
 
@@ -124,6 +125,9 @@ namespace Ore
     float time = (float)glfwGetTime();
     deltaTime = time - lastFrameTime;
     lastFrameTime = time;
+
+    for (auto node : nodes)
+      node->onUpdate();
 
     for (auto node : nodes)
       node->render(camera);

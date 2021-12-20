@@ -10,7 +10,7 @@ public:
 
   void onUpdate() override
   {
-    node->translate(vec3(0.1, 0.0, 0.0) * Ore::Application::getInstance().getDeltaTime());
+    parent->cast<Ore::WorldNode*>()->translate(vec3(0.1, 0.0, 0.0) * Ore::Application::getInstance().getDeltaTime());
   }
 };
 
