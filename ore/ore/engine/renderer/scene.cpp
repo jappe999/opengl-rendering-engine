@@ -5,12 +5,12 @@
 
 namespace Ore
 {
-  void Scene::addNode(Node *node)
+  void Scene::addNode(WorldNode *node)
   {
     nodes.emplace_back(std::move(node));
   }
 
-  std::vector<Node *> Scene::getNodes() const
+  std::vector<WorldNode *> Scene::getNodes() const
   {
     return nodes;
   }
@@ -25,10 +25,6 @@ namespace Ore
       if (node->isDerivedFrom<Renderable>())
         dynamic_cast<Renderable *>(node)->render(camera);
     }
-  }
-
-  Scene::Scene()
-  {
   }
 
   Scene::~Scene()

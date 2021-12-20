@@ -6,11 +6,8 @@ using namespace glm;
 class CameraController : public Ore::Behavior
 {
 public:
-  CameraController(Ore::WorldNode *node) : Behavior(node)
+  CameraController()
   {
-    camera = node->cast<Ore::Camera *>();
-    prevYaw = Ore::Input::getCursorPosition().x;
-    prevPitch = Ore::Input::getCursorPosition().y;
   }
 
   void onUpdate() override

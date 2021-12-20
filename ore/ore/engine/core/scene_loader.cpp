@@ -46,8 +46,7 @@ namespace Ore
 
       for (auto script : nodeConfig["scripts"])
       {
-        Behavior *behavior = NodeFactory::create(script.as<std::string>(), node)
-                                 ->cast<Behavior *>();
+        Behavior *behavior = NodeFactory::create(script.as<std::string>())->cast<Behavior *>();
         node->addBehavior(behavior);
 
         std::cout << "Added script '" << script.as<std::string>() << "' to '"

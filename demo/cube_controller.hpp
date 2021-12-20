@@ -6,7 +6,7 @@ using namespace glm;
 class CubeController : public Ore::Behavior
 {
 public:
-  CubeController(Ore::WorldNode *node) : Ore::Behavior(node) {}
+  CubeController() {}
 
   void onUpdate() override
   {

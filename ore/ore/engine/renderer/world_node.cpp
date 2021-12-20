@@ -1,7 +1,25 @@
 #include "ore/engine/renderer/world_node.hpp"
+#include "ore/engine/renderer/behavior.hpp"
 
 namespace Ore
 {
+  WorldNode::~WorldNode()
+  {
+
+    for (auto behavior : behaviors)
+    {
+      delete behavior;
+      behavior = nullptr;
+    }
+    behaviors.clear();
+  }
+
+  void WorldNode::addBehavior(Behavior *behavior)
+  {
+    behavior->setParent(this);
+    behaviors.emplace_back(behavior);
+  }
+
   vec3 WorldNode::getPosition()
   {
     return position;

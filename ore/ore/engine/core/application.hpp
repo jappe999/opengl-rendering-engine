@@ -28,6 +28,9 @@ namespace Ore
     void loadScene(std::string path);
     void unloadCurrentScene();
 
+    void addNode(Node *node);
+    void removeNode(Node *node);
+
     virtual void onStart() {}
     virtual void onDestroy() {}
 
@@ -43,6 +46,8 @@ namespace Ore
     Window *window;
     Scene *scene;
     Camera *camera;
+
+    std::vector<Node *> nodes;
 
   private:
     void destroy();

@@ -13,7 +13,7 @@ namespace Ore
   class Renderable : public WorldNode
   {
   public:
-    Renderable(WorldNode *parent = nullptr) : WorldNode(parent) {}
+    Renderable() {}
     ~Renderable() = default;
 
     virtual void useShader(Shader *shader);

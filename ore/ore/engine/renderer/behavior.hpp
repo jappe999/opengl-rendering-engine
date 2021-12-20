@@ -10,7 +10,7 @@ namespace Ore
   class Behavior : public Node
   {
   public:
-    Behavior(WorldNode *node) : Node(node), node(node) {}
+    Behavior() {}
     ~Behavior() = default;
 
     void onEvent(Events::Event &event)

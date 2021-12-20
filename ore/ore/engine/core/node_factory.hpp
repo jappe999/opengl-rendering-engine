@@ -7,12 +7,11 @@
 namespace Ore
 {
   class Node;
-  class WorldNode;
 
   struct NodeFactory
   {
   private:
-    typedef Node *NodeInstantiator(WorldNode *parentNode);
+    typedef Node *NodeInstantiator();
     typedef std::map<std::string, NodeInstantiator *> NodeInstantiators;
     static NodeInstantiators &instantiators()
     {
@@ -21,14 +20,14 @@ namespace Ore
     }
 
   public:
-    static Node *create(const std::string id, WorldNode *parentNode = nullptr)
+    static Node *create(const std::string id)
     {
       // Find the instantiator function for the id.
       const NodeInstantiators::const_iterator iterator = instantiators().find(id);
 
       // If the function is found, execute it to create the new Node.
       if (iterator != instantiators().end())
-        return (*iterator->second)(parentNode);
+        return (*iterator->second)();
 
       std::cout << "Cannot find instantiator function for id " << id << "." << std::endl;
       return 0;
@@ -38,10 +37,9 @@ namespace Ore
     template <class T = int>
     struct Register
     {
-      static Node *create(WorldNode *parentNode = nullptr) { return new T(parentNode); }
+      static Node *create() { return new T(); }
       static NodeInstantiator *withId(const std::string id)
       {
-        std::cout << id << std::endl;
         return instantiators()[id] = create;
       }
       static NodeInstantiator *instantiator;
