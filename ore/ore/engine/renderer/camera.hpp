@@ -10,7 +10,7 @@ namespace Ore
   class Camera : public WorldNode
   {
   public:
-    Camera(Node *parent = nullptr);
+    Camera();
     ~Camera();
 
     /**

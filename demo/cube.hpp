@@ -4,7 +4,7 @@
 class Cube : public Ore::Renderable
 {
 public:
-  Cube(Ore::WorldNode *parent = nullptr) : Ore::Renderable(parent) {}
+  Cube() {}
 
   void bind()
   {

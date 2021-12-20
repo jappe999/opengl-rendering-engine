@@ -4,7 +4,7 @@ ORE_REGISTER_NODE(Ore::Camera, "ore_camera");
 
 namespace Ore
 {
-  Camera::Camera(Node *parent) : WorldNode(parent)
+  Camera::Camera()
   {
     targetFront = vec3(0.0f, 0.0f, -1.0f);
     position = vec3(0.0f, 0.0f, -5.0f);

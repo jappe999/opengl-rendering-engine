@@ -10,21 +10,21 @@ namespace Ore
 {
   class SceneLoader;
 
-  class Scene
+  class Scene : public Node
   {
   public:
-    Scene();
+    Scene() {}
     ~Scene();
 
     void render(Camera *camera);
 
-    void addNode(Node *node);
-    std::vector<Node *> getNodes() const;
+    void addNode(WorldNode *node);
+    std::vector<WorldNode *> getNodes() const;
 
     Camera *getMainCamera() { return mainCamera; }
 
   private:
-    std::vector<Node *> nodes;
+    std::vector<WorldNode *> nodes;
     Camera *mainCamera;
 
   private:

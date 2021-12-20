@@ -11,6 +11,8 @@ namespace Ore
     scene = SceneLoader::deserialize(path);
     camera = scene->getMainCamera();
     camera->setAspectRatio((float)window->data.width / window->data.height);
+
+    addNode(scene);
   }
 
   void Application::unloadCurrentScene()
@@ -23,6 +25,16 @@ namespace Ore
       // Camera is removed by the scene.
       camera = nullptr;
     }
+  }
+
+  void Application::addNode(Node *node)
+  {
+    nodes.emplace_back(node);
+  }
+
+  void Application::removeNode(Node *node)
+  {
+    nodes.erase(std::remove(nodes.begin(), nodes.end(), node), nodes.end());
   }
 
   bool Application::create(int32_t width, int32_t height, bool fullScreen)
@@ -113,7 +125,8 @@ namespace Ore
     deltaTime = time - lastFrameTime;
     lastFrameTime = time;
 
-    scene->render(camera);
+    for (auto node : nodes)
+      node->render(camera);
 
     glfwSwapBuffers(window->getNative());
   }

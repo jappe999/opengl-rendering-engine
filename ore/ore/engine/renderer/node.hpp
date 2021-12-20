@@ -8,16 +8,27 @@
 namespace Ore
 {
   class Behavior;
+  class Camera;
 
   class Node
   {
   public:
-    Node(Node *parent = nullptr) { this->parent = parent; };
-    ~Node();
+    Node() {}
+    ~Node() {}
 
-    void addBehavior(Behavior *behavior);
+    /**
+     * @brief Callback for frame update.
+     */
     virtual void onUpdate();
+
+    /**
+     * @brief Callback for event.
+     *
+     * @param event The triggered event.
+     */
     virtual void onEvent(Events::Event &event);
+
+    virtual void render(Camera *camera);
 
     template <typename T>
     bool isA() { return typeid(*this) == typeid(T); }
@@ -30,10 +41,13 @@ namespace Ore
 
     bool hasParent() { return parent != nullptr; }
     Node *getParent() { return parent; }
+    void setParent(Node *parent) { this->parent = parent; }
+
+    void addChild(Node *child);
+    std::vector<Node *> getChildren();
 
   private:
-    std::vector<Behavior *> behaviors;
-
     Node *parent;
+    std::vector<Node *> children;
   };
 } // namespace Ore
