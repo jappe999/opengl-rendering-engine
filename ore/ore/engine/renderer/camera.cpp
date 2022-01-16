@@ -41,8 +41,6 @@ namespace Ore
 
   void Camera::rotate(float angle, vec3 axes)
   {
-    // std::cout << "Angle: " << angle << ", X: " << axes.x << ", Y: " << axes.y << ", Z: " << axes.z << std::endl
-    // << "Yaw: " << yaw << ", Pitch: " << pitch << ", Roll: " << orientation.z << std::endl;
     yaw += angle * axes.x;
     pitch += angle * axes.y;
     orientation.z += angle * axes.z;
@@ -80,7 +78,6 @@ namespace Ore
 
   void Camera::setAspectRatio(float ratio)
   {
-    std::cout << ratio << std::endl;
     aspect = ratio;
   }
 

@@ -52,7 +52,8 @@ namespace Ore
 
     auto windowResizeCallback = [](GLFWwindow *window, int32_t width, int32_t height)
     {
-      WindowData data = *(WindowData *)glfwGetWindowUserPointer(window);
+      WindowData &data = *(WindowData *)glfwGetWindowUserPointer(window);
+
       data.width = width;
       data.height = height;
 
@@ -60,8 +61,11 @@ namespace Ore
       data.eventCallback(event);
     };
 
+#ifdef __APPLE__
     glfwSetFramebufferSizeCallback(window, windowResizeCallback);
+#else
     glfwSetWindowSizeCallback(window, windowResizeCallback);
+#endif
 
     glfwSetCursorPosCallback(
         window,
@@ -130,7 +134,7 @@ namespace Ore
     // (void)io;
 
     ImGui_ImplGlfw_InitForOpenGL(getNative(), true);
-    ImGui_ImplOpenGL3_Init("#version 130");
+    ImGui_ImplOpenGL3_Init("#version 330");
   }
 
   void Window::closeImGui()
