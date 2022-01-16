@@ -13,9 +13,12 @@ namespace Ore
 
     std::cout << "Loading scene '" << config["name"] << "'" << std::endl;
 
+    scene->name = config["name"].as<std::string>();
+
     for (auto nodeConfig : config["nodes"])
     {
       WorldNode *node = NodeFactory::create(nodeConfig["type"].as<std::string>())->cast<WorldNode *>();
+      node->name = config["name"].as<std::string>();
 
       if (node->isDerivedFrom<Camera>() && nodeConfig["properties"]["main"])
       {
@@ -47,6 +50,7 @@ namespace Ore
       for (auto script : nodeConfig["scripts"])
       {
         Behavior *behavior = NodeFactory::create(script.as<std::string>())->cast<Behavior *>();
+        behavior->name = script.as<std::string>();
         node->addBehavior(behavior);
 
         std::cout << "Added script '" << script.as<std::string>() << "' to '"

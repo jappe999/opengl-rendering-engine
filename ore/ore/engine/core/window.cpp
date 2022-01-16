@@ -50,17 +50,18 @@ namespace Ore
     // glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
 
-    glfwSetFramebufferSizeCallback(
-        window,
-        [](GLFWwindow *window, int32_t width, int32_t height)
-        {
-          WindowData data = *(WindowData *)glfwGetWindowUserPointer(window);
-          data.width = width;
-          data.height = height;
+    auto windowResizeCallback = [](GLFWwindow *window, int32_t width, int32_t height)
+    {
+      WindowData data = *(WindowData *)glfwGetWindowUserPointer(window);
+      data.width = width;
+      data.height = height;
 
-          Events::WindowResizeEvent event(width, height);
-          data.eventCallback(event);
-        });
+      Events::WindowResizeEvent event(width, height);
+      data.eventCallback(event);
+    };
+
+    glfwSetFramebufferSizeCallback(window, windowResizeCallback);
+    glfwSetWindowSizeCallback(window, windowResizeCallback);
 
     glfwSetCursorPosCallback(
         window,
@@ -119,5 +120,23 @@ namespace Ore
   void Window::setEventCallback(const EventCallback &callback)
   {
     data.eventCallback = callback;
+  }
+
+  void Window::setupImGui()
+  {
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    // ImGuiIO &io = ImGui::GetIO();
+    // (void)io;
+
+    ImGui_ImplGlfw_InitForOpenGL(getNative(), true);
+    ImGui_ImplOpenGL3_Init("#version 130");
+  }
+
+  void Window::closeImGui()
+  {
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
   }
 } // namespace Ore

@@ -6,6 +6,12 @@
     "glfw3",
     "yaml-cpp",
     "glm",
-    "imguiglfw-binding"
+    {
+      "name": "imgui",
+      "features": [
+        "glfw-binding",
+        "opengl3-binding"
+      ]
+    }
   ]
 }

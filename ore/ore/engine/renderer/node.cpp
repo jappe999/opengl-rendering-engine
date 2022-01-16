@@ -8,7 +8,7 @@ namespace Ore
 {
   Node::~Node()
   {
-    for (auto child : children)
+    for (Node *child : children)
     {
       delete child;
       child = nullptr;

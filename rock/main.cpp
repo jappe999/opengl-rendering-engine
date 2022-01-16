@@ -2,7 +2,7 @@
 
 int main()
 {
-  Ore::RockEditor app;
+  Rock::RockEditor app;
 
   if (app.create(480, 360))
     app.start();

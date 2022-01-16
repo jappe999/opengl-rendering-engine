@@ -80,6 +80,7 @@ namespace Ore
 
   void Camera::setAspectRatio(float ratio)
   {
+    std::cout << ratio << std::endl;
     aspect = ratio;
   }
 

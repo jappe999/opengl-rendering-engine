@@ -23,6 +23,9 @@ find_package(glfw3 CONFIG REQUIRED)
 target_link_libraries(demo PRIVATE glfw)
 target_link_libraries(rock PRIVATE glfw)
 
+find_package(imgui CONFIG REQUIRED)
+target_link_libraries(ore PRIVATE imgui::imgui)
+
 find_package(yaml-cpp CONFIG REQUIRED)
 target_link_libraries(ore PRIVATE yaml-cpp)
 target_link_libraries(demo PRIVATE yaml-cpp)
