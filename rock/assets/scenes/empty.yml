@@ -2,5 +2,6 @@ name: 'Empty scene'
 
 nodes:
   - type: ore_camera
+    name: "Main camera"
     properties:
       main: true

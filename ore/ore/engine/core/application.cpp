@@ -19,6 +19,8 @@ namespace Ore
   {
     if (scene != nullptr)
     {
+      removeNode(scene);
+
       delete scene;
       scene = nullptr;
 
@@ -45,6 +47,7 @@ namespace Ore
       return false;
 
     window->setEventCallback(RE_BIND_EVENT_FN(Application::onEvent));
+    window->setupImGui();
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
@@ -94,6 +97,7 @@ namespace Ore
 
   void Application::destroy()
   {
+    window->closeImGui();
     unloadCurrentScene();
     onDestroy();
   }
@@ -122,6 +126,10 @@ namespace Ore
     glClearColor(0, 0, 0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+
     float time = (float)glfwGetTime();
     deltaTime = time - lastFrameTime;
     lastFrameTime = time;
@@ -131,6 +139,9 @@ namespace Ore
 
     for (auto node : nodes)
       node->render(camera);
+
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
     glfwSwapBuffers(window->getNative());
   }

@@ -1,4 +1,4 @@
-name: 'Scene name'
+name: 'Empty void with cube'
 
 shaders:
   &1 base:
@@ -6,12 +6,14 @@ shaders:
 
 nodes:
   - type: ore_camera
+    name: "Main camera"
     position: [0, 0, -5]
     scripts:
       - camera_controller
     properties:
       main: true
   - type: cube
+    name: "Moving cube"
     position: [0, 0, 0]
     rotation: [0, 1, 0, 45.0]
     scripts:

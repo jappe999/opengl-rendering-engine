@@ -1,16 +1,20 @@
 #include <iostream>
 #include <ore/engine.hpp>
+#include "ui/scenes/scene_manager.hpp"
 
-namespace Ore
+namespace Rock
 {
-  class RockEditor : public Application
+  class RockEditor : public Ore::Application
   {
   public:
-    RockEditor() : Application("Rock Editor - Ore") {}
+    RockEditor() : Ore::Application("Rock Editor - Ore") {}
 
     void onStart() override
     {
       loadScene("assets/scenes/empty.yml");
+      SceneManager *sceneManager = new SceneManager();
+      sceneManager->name = "Scene manager";
+      addNode(sceneManager);
       cout << "Starting Rock editor!" << endl;
     }
 

@@ -1,19 +1,27 @@
 #include "./scene_manager.hpp"
+#include <ore/engine.hpp>
+#include "../../../demo/cube.hpp"
+#include "../../../demo/camera_controller.hpp"
+#include "../../../demo/cube_controller.hpp"
 
 namespace Rock
 {
   void SceneManager::onUpdate()
   {
-    ImGui_ImplOpenGL3_NewFrame();
-    ImGui_ImplGlfw_NewFrame();
-    ImGui::NewFrame();
     ImGui::Begin("Hello, world!");
-    ImGui::Text("Hello, world");
-    ImGui::End();
-  }
 
-  void SceneManager::openScene(std::string path)
-  {
-    scene = Ore::SceneLoader::deserialize(path);
+    if (currentScene != "empty-void-with-cube" && ImGui::Button("Open cube scene"))
+    {
+      Ore::Application::getInstance().loadScene("assets/scenes/empty-void-with-cube.yml");
+      currentScene = "empty-void-with-cube";
+    }
+
+    if (currentScene != "empty" && ImGui::Button("Open empty scene"))
+    {
+      Ore::Application::getInstance().loadScene("assets/scenes/empty.yml");
+      currentScene = "empty";
+    }
+
+    ImGui::End();
   }
 } // namespace Rock

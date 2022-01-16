@@ -51,6 +51,8 @@ namespace Ore
     void addChild(Node *child);
     std::vector<Node *> getChildren();
 
+    std::string name;
+
   protected:
     Node *parent;
     std::vector<Node *> children;

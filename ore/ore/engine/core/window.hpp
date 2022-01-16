@@ -5,6 +5,11 @@
 #include <functional>
 #include "ore/libs/glad/glad.h"
 #include <GLFW/glfw3.h>
+
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
+
 #include "ore/engine/events/event.hpp"
 
 namespace Ore
@@ -21,6 +26,8 @@ namespace Ore
 
     bool createContext();
     void setEventCallback(const EventCallback &callback);
+    void setupImGui();
+    void closeImGui();
 
   protected:
     struct WindowData
