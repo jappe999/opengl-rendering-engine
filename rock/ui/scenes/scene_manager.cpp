@@ -15,8 +15,7 @@ namespace Rock
       Ore::Application::getInstance().loadScene("assets/scenes/empty-void-with-cube.yml");
       currentScene = "empty-void-with-cube";
     }
-
-    if (currentScene != "empty" && ImGui::Button("Open empty scene"))
+    else if (currentScene != "empty" && ImGui::Button("Open empty scene"))
     {
       Ore::Application::getInstance().loadScene("assets/scenes/empty.yml");
       currentScene = "empty";
