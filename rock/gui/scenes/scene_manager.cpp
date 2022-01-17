@@ -1,5 +1,5 @@
-#include "./scene_manager.hpp"
 #include <ore/engine.hpp>
+#include "./scene_manager.hpp"
 #include "../../../demo/cube.hpp"
 #include "../../../demo/camera_controller.hpp"
 #include "../../../demo/cube_controller.hpp"
@@ -8,7 +8,7 @@ namespace Rock
 {
   void SceneManager::onUpdate()
   {
-    ImGui::Begin("Hello, world!");
+    ImGui::Begin(name.c_str());
 
     if (currentScene != "empty-void-with-cube" && ImGui::Button("Open cube scene"))
     {

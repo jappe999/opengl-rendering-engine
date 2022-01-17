@@ -1,4 +1,5 @@
-#include <string>
+#pragma once
+
 #include <ore/engine.hpp>
 
 namespace Rock
@@ -6,6 +7,8 @@ namespace Rock
   class SceneManager : public Ore::Node
   {
   public:
+    std::string name = "Scene Manager";
+
     void onUpdate() override;
 
   private:
