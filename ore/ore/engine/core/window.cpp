@@ -28,7 +28,11 @@ namespace Ore
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
 
-    window = glfwCreateWindow(data.width, data.height, data.title.c_str(), NULL, NULL);
+    GLFWmonitor *monitor = glfwGetPrimaryMonitor();
+
+    const GLFWvidmode *mode = glfwGetVideoMode(monitor);
+
+    window = glfwCreateWindow(mode->width, mode->height, data.title.c_str(), NULL, NULL);
 
     if (!window)
     {
