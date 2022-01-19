@@ -1,6 +1,7 @@
 #include "imgui_internal.h"
 #include <ore/engine.hpp>
 #include "scenes/scene_manager.hpp"
+#include "scenes/scene_view.hpp"
 
 namespace Rock
 {
@@ -13,6 +14,9 @@ namespace Rock
     {
       SceneManager *sceneManager = new SceneManager();
       addChild(sceneManager);
+
+      SceneView *sceneView = new SceneView();
+      addChild(sceneView);
 
       Ore::Node::onStart();
     }
@@ -81,7 +85,7 @@ namespace Rock
           auto dock_id_left = ImGui::DockBuilderSplitNode(dockspace_id, ImGuiDir_Left, 0.2f, nullptr, &dockspace_id);
 
           // we now dock our windows into the docking node we made above
-          ImGui::DockBuilderDockWindow("Scene", dock_id_up);
+          ImGui::DockBuilderDockWindow("Scene View", dock_id_up);
           ImGui::DockBuilderDockWindow("Node Editor", dock_id_right);
           ImGui::DockBuilderDockWindow("Files", dock_id_down);
           ImGui::DockBuilderDockWindow("Scene Manager", dock_id_left);

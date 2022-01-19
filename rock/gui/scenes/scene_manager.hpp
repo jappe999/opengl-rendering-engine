@@ -1,15 +1,15 @@
 #pragma once
 
-#include <ore/engine.hpp>
+#include "../gui_window.hpp"
 
 namespace Rock
 {
-  class SceneManager : public Ore::Node
+  class SceneManager : public GuiWindow
   {
   public:
-    std::string name = "Scene Manager";
+    SceneManager() : GuiWindow("Scene Manager") {}
 
-    void onUpdate() override;
+    void onGui() override;
 
   private:
     std::string currentScene = "empty";
