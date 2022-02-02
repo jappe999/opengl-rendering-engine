@@ -67,6 +67,13 @@ namespace Ore
 
 #ifdef __APPLE__
     glfwSetFramebufferSizeCallback(window, windowResizeCallback);
+
+    // TODO: Find a better place for this.
+    int fWidth, fHeight;
+    glfwGetFramebufferSize(window, &fWidth, &fHeight);
+    data.width = fWidth;
+    data.height = fHeight;
+    glViewport(0, 0, fWidth, fHeight);
 #else
     glfwSetWindowSizeCallback(window, windowResizeCallback);
 #endif

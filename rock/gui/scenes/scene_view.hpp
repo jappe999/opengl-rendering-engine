@@ -1,13 +1,16 @@
-#pragma once
-
 #include <GLFW/glfw3.h>
-#include "../gui_window.hpp"
+#include <ore/engine.hpp>
 
 namespace Rock
 {
-  class SceneView : public GuiWindow
+  class SceneView : public Ore::GuiWindow
   {
-  public:
-    SceneView() : GuiWindow("Scene View") {}
+    void onGui() override
+    {
+      if (begin("Scene View"))
+      {
+      }
+      end();
+    }
   };
 } // namespace Rock

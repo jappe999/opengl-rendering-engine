@@ -74,6 +74,8 @@ namespace Ore
 
     hasStarted = true;
 
+    guiManager = new GuiManager();
+
     onStart();
 
     for (auto node : nodes)
@@ -126,22 +128,22 @@ namespace Ore
     glClearColor(0, 0, 0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    ImGui_ImplOpenGL3_NewFrame();
-    ImGui_ImplGlfw_NewFrame();
-    ImGui::NewFrame();
+    guiManager->onUpdate();
 
     float time = (float)glfwGetTime();
     deltaTime = time - lastFrameTime;
     lastFrameTime = time;
 
     for (auto node : nodes)
+    {
       node->onUpdate();
+      node->render(camera);
+    }
 
     for (auto node : nodes)
-      node->render(camera);
+      node->onGui();
 
-    ImGui::Render();
-    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    guiManager->render();
 
     glfwSwapBuffers(window->getNative());
   }

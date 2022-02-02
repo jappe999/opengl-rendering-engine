@@ -27,6 +27,11 @@ namespace Ore
     virtual void onUpdate();
 
     /**
+     * @brief Callback after updating the node state.
+     */
+    virtual void onGui();
+
+    /**
      * @brief Callback for event.
      *
      * @param event The triggered event.

@@ -3,6 +3,7 @@
 #include <string>
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
+#include "ore/engine/renderer/gui/gui_manager.hpp"
 #include "ore/engine/renderer/scene.hpp"
 #include "ore/engine/core/window.hpp"
 #include "ore/engine/events/window.hpp"
@@ -46,6 +47,7 @@ namespace Ore
     Window *window;
     Scene *scene;
     Camera *camera;
+    GuiManager *guiManager;
 
     std::vector<Node *> nodes;
 

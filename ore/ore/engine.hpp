@@ -7,6 +7,7 @@
 #include "ore/engine/events/key.hpp"
 #include "ore/engine/events/mouse.hpp"
 #include "ore/engine/events/window.hpp"
+#include "ore/engine/renderer/gui/gui_window.hpp"
 #include "ore/engine/renderer/behavior.hpp"
 #include "ore/engine/renderer/camera.hpp"
 #include "ore/engine/renderer/node.hpp"

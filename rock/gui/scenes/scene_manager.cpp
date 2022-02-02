@@ -18,5 +18,7 @@ namespace Rock
       Ore::Application::getInstance().loadScene("assets/scenes/empty.yml");
       currentScene = "empty";
     }
+
+    Ore::GuiWindow::onGui();
   }
 } // namespace Rock

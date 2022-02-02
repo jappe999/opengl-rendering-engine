@@ -1,14 +1,9 @@
-#pragma once
-
-#include "../gui_window.hpp"
-
+#include <ore/engine.hpp>
 namespace Rock
 {
-  class SceneManager : public GuiWindow
+  class SceneManager : public Ore::GuiWindow
   {
   public:
-    SceneManager() : GuiWindow("Scene Manager") {}
-
     void onGui() override;
 
   private:

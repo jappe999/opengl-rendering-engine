@@ -23,6 +23,11 @@ public:
     rotate();
   }
 
+  void onGui() override
+  {
+    std::cout << "GUI" << std::endl;
+  }
+
   bool onWindowResize(Ore::Events::WindowResizeEvent &event) override
   {
     camera->setAspectRatio((float)event.getWidth() / event.getHeight());
