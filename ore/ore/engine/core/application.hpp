@@ -6,6 +6,7 @@
 #include "ore/engine/renderer/scene.hpp"
 #include "ore/engine/core/window.hpp"
 #include "ore/engine/events/window.hpp"
+#include "ore/engine/graphics/renderers/render_graph.hpp"
 
 namespace Ore
 {
@@ -55,6 +56,8 @@ namespace Ore
     void onEvent(Events::Event &event);
     bool onWindowResize(Events::WindowResizeEvent &event);
     void render();
+
+    Ore::Graphics::RenderGraph *m_renderGraph;
 
     bool hasStarted = false;
 

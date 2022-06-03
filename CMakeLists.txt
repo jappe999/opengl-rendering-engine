@@ -7,6 +7,29 @@ project(Game VERSION 0.1.0)
 
 include_directories(ore)
 
+if(WIN32)
+    add_compile_definitions(ORE_PLATFORM_WINDOWS=1)
+    add_compile_definitions(ORE_RENDER_API_OPENGL=1)
+endif ()
+
+if (UNIX AND NOT APPLE)
+    add_compile_definitions(ORE_PLATFORM_UNIX=1)
+    add_compile_definitions(ORE_PLATFORM_LINUX=1)
+    add_compile_definitions(ORE_RENDER_API_OPENGL=1)
+endif ()
+
+if (UNIX AND APPLE)
+    add_compile_definitions(ORE_PLATFORM_UNIX=1)
+    add_compile_definitions(ORE_PLATFORM_APPLE=1)
+    add_compile_definitions(ORE_RENDER_API_OPENGL=1)
+endif ()
+
+if(${CMAKE_BUILD_TYPE} MATCHES Debug)
+    add_compile_definitions(_DEBUG=1)
+else()
+    add_compile_definitions(NDEBUG=1)
+endif(${CMAKE_BUILD_TYPE} MATCHES Debug)
+
 file(GLOB_RECURSE DEMO_SRC CONFIGURE_DEPENDS demo/*.cpp demo/*.c demo/*.hpp demo/*.h)
 file(GLOB_RECURSE ENGINE_SRC CONFIGURE_DEPENDS ore/*.cpp ore/*.c ore/*.hpp ore/*.h)
 file(GLOB_RECURSE EDITOR_SRC CONFIGURE_DEPENDS rock/*.cpp rock/*.c rock/*.hpp rock/*.h)
