@@ -1,11 +1,10 @@
 #include "graphics_context.hpp"
-#include "platform/opengl/gl_functions.hpp"
+#include "ore/platform/opengl/gl_functions.hpp"
 
 namespace Ore
 {
   namespace Graphics
   {
-
     void GraphicsContext::setRenderAPI(RenderAPI api)
     {
       s_renderAPI = api;
@@ -13,7 +12,7 @@ namespace Ore
       switch (api)
       {
       case RenderAPI::OpenGL:
-        OpenGL::makeDefault();
+        GL::makeDefault();
         break;
 
       default:
@@ -21,7 +20,7 @@ namespace Ore
       }
     }
 
-    GraphicsContext *create()
+    GraphicsContext *GraphicsContext::create()
     {
       return createFunction();
     }

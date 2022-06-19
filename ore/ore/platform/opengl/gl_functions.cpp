@@ -1,7 +1,10 @@
 #include "gl_functions.hpp"
 #include "gl_renderer.hpp"
 
-void Ore::Graphics::OpenGL::makeDefault()
+namespace Ore::Graphics::GL
 {
-  OpenGLRenderer::makeDefault();
+  void makeDefault()
+  {
+    Ore::Graphics::OpenGLRenderer::makeDefault();
+  }
 }

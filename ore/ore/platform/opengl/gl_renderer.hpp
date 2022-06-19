@@ -1,18 +1,18 @@
 #pragma once
 
-#include "ore/engine/graphics/hardware_interfaces/render_api.hpp"
+#include "ore/engine/graphics/hardware_interfaces/renderer.hpp"
 
 namespace Ore
 {
   namespace Graphics
   {
-    class OpenGLRenderer : public RenderAPI
+    class OpenGLRenderer : public Renderer
     {
     public:
       static void makeDefault();
 
     protected:
-      static RenderAPI *createFunctionGL();
+      static Renderer *createFunctionGL();
     };
   }
 }

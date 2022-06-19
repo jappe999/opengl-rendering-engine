@@ -1,5 +1,3 @@
-#pragma once
-
 #include "gl_renderer.hpp"
 
 namespace Ore
@@ -11,7 +9,7 @@ namespace Ore
       createFunction = createFunctionGL;
     }
 
-    RenderAPI *OpenGLRenderer::createFunctionGL()
+    Renderer *OpenGLRenderer::createFunctionGL()
     {
       return new OpenGLRenderer();
     }

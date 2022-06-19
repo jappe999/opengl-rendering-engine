@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Ore::Graphics::OpenGL
+namespace Ore::Graphics::GL
 {
   void makeDefault();
 }

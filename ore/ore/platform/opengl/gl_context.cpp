@@ -1,18 +1,15 @@
-#include "ore/engine/graphics/hardware_interfaces/graphics_context.hpp"
+#include "ore/platform/opengl/gl_context.hpp"
 
 namespace Ore
 {
     namespace Graphics
     {
-        GLContext() = default;
-        ~GLContext() = default;
-
         void GLContext::makeDefault()
         {
             createFunction = createFunctionGL;
         }
 
-        static GraphicsContext *createFunctionGL()
+        GraphicsContext *GLContext::createFunctionGL()
         {
             return new GLContext();
         }
