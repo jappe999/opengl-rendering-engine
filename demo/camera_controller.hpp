@@ -13,8 +13,8 @@ public:
   void onStart() override
   {
     camera = parent->cast<Ore::Camera *>();
-    prevYaw = Ore::Input::getCursorPosition().x;
-    prevPitch = Ore::Input::getCursorPosition().y;
+    prevYaw = Ore::Input::get()->getCursorPosition().x;
+    prevPitch = Ore::Input::get()->getCursorPosition().y;
   }
 
   void onUpdate() override
@@ -27,7 +27,7 @@ public:
   {
     camera->setAspectRatio((float)event.getWidth() / event.getHeight());
 
-    vec2 position = Ore::Input::getCursorPosition();
+    vec2 position = Ore::Input::get()->getCursorPosition();
     prevYaw = position.x;
     prevPitch = position.y;
 
@@ -48,17 +48,17 @@ private:
     float speed = movementSpeed * Ore::Application::getInstance().getDeltaTime();
 
     float forward = 0;
-    if (Ore::Input::isKeyPressed(GLFW_KEY_W) || Ore::Input::isKeyPressed(GLFW_KEY_UP))
+    if (Ore::Input::get()->isKeyPressed(GLFW_KEY_W) || Ore::Input::get()->isKeyPressed(GLFW_KEY_UP))
       forward = speed;
-    else if (Ore::Input::isKeyPressed(GLFW_KEY_S) || Ore::Input::isKeyPressed(GLFW_KEY_DOWN))
+    else if (Ore::Input::get()->isKeyPressed(GLFW_KEY_S) || Ore::Input::get()->isKeyPressed(GLFW_KEY_DOWN))
       forward = -speed;
 
     camera->translate(camera->getTargetFront() * forward);
 
     float right = 0;
-    if (Ore::Input::isKeyPressed(GLFW_KEY_A) || Ore::Input::isKeyPressed(GLFW_KEY_LEFT))
+    if (Ore::Input::get()->isKeyPressed(GLFW_KEY_A) || Ore::Input::get()->isKeyPressed(GLFW_KEY_LEFT))
       right = -speed;
-    else if (Ore::Input::isKeyPressed(GLFW_KEY_D) || Ore::Input::isKeyPressed(GLFW_KEY_RIGHT))
+    else if (Ore::Input::get()->isKeyPressed(GLFW_KEY_D) || Ore::Input::get()->isKeyPressed(GLFW_KEY_RIGHT))
       right = speed;
 
     camera->translate(camera->getTargetRight() * right);
@@ -88,7 +88,7 @@ private:
   void rotate()
   {
     static float maxY = 22.0f;
-    vec2 position = Ore::Input::getCursorPosition();
+    vec2 position = Ore::Input::get()->getCursorPosition();
 
     if (!prevYaw)
       prevYaw = position.x;

@@ -10,11 +10,13 @@ namespace Ore::Events
   enum EventType
   {
     WindowResize,
-    MouseMove,
     KeyPress,
     KeyRepeat,
     KeyRelease,
     KeyChar,
+    MouseMove,
+    MousePress,
+    MouseRelease,
   };
 
 /** A convience macro for getting information about the event. */

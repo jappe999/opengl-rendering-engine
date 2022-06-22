@@ -2,6 +2,7 @@
 #include "ore/engine/core/scene_loader.hpp"
 #include "ore/platform/opengl/gl.hpp"
 #include "ore/engine/graphics/hardware_interfaces/graphics_context.hpp"
+#include "ore/engine/core/input.hpp"
 
 namespace Ore
 {
@@ -102,6 +103,8 @@ namespace Ore
   {
     Events::EventDispatcher dispatcher(event);
     dispatcher.dispatch<Events::WindowResizeEvent>(RE_BIND_EVENT_FN(onWindowResize));
+
+    Input::get()->onEvent(event);
 
     for (auto node : nodes)
       node->onEvent(event);
