@@ -4,7 +4,7 @@
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 #include "ore/engine/renderer/scene.hpp"
-#include "ore/engine/core/window.hpp"
+#include "ore/platform/glfw/glfw_window.hpp"
 #include "ore/engine/events/window.hpp"
 #include "ore/engine/graphics/renderers/render_graph.hpp"
 
@@ -19,6 +19,7 @@ namespace Ore
         : title(_title), scene(nullptr), camera(nullptr)
     {
       instance = this;
+      GLFWWindow::makeDefault();
     }
     ~Application() {}
 

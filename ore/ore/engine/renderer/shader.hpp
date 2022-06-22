@@ -4,7 +4,7 @@
 #include <string.h>
 #include <string>
 #include <map>
-#include "ore/libs/glad/glad.h"
+#include "ore/platform/opengl/gl.hpp"
 
 using namespace std;
 

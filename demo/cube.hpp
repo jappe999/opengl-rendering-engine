@@ -1,4 +1,4 @@
-#include <ore/libs/glad/glad.h>
+#include <ore/platform/opengl/gl.hpp>
 #include <ore/engine.hpp>
 
 class Cube : public Ore::Renderable

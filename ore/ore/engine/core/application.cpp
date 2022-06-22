@@ -1,5 +1,7 @@
 #include "ore/engine/core/application.hpp"
 #include "ore/engine/core/scene_loader.hpp"
+#include "ore/platform/opengl/gl.hpp"
+#include "ore/engine/graphics/hardware_interfaces/graphics_context.hpp"
 
 namespace Ore
 {
@@ -41,7 +43,9 @@ namespace Ore
 
   bool Application::create(int32_t width, int32_t height, bool fullScreen)
   {
-    window = new Window(title, width, height);
+    Graphics::GraphicsContext::setRenderAPI(static_cast<Graphics::RenderAPI>(Graphics::RenderAPI::OpenGL));
+
+    window = Window::create(title, width, height);
 
     if (!window->createContext())
       return false;
@@ -54,14 +58,6 @@ namespace Ore
     glEnable(GL_BLEND);
     glEnable(GL_MULTISAMPLE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    const GLubyte *glRenderer = glGetString(GL_RENDERER); // get renderer string
-    const GLubyte *glVersion = glGetString(GL_VERSION);   // version as a string
-    const GLubyte *glShader = glGetString(GL_SHADING_LANGUAGE_VERSION);
-
-    printf("Renderer: %s\n", glRenderer);
-    printf("OpenGL version supported %s\n", glVersion);
-    printf("Shader supported %s\n", glShader);
 
     return true;
   }
@@ -126,10 +122,6 @@ namespace Ore
     glClearColor(0, 0, 0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    ImGui_ImplOpenGL3_NewFrame();
-    ImGui_ImplGlfw_NewFrame();
-    ImGui::NewFrame();
-
     float time = (float)glfwGetTime();
     deltaTime = time - lastFrameTime;
     lastFrameTime = time;
@@ -139,9 +131,6 @@ namespace Ore
 
     for (auto node : nodes)
       node->render(camera);
-
-    ImGui::Render();
-    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
     glfwSwapBuffers(window->getNative());
   }

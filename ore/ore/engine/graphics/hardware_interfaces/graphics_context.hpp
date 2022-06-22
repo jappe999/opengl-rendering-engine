@@ -4,19 +4,25 @@ namespace Ore
 {
   namespace Graphics
   {
+    /**
+     * List of available render APIs.
+     */
     enum RenderAPI
     {
       OpenGL,
       None,
     };
 
+    /**
+     * Enables switching between different render APIs.
+     */
     class GraphicsContext
     {
     public:
-      virtual ~GraphicsContext();
-
       static RenderAPI getRenderAPI() { return s_renderAPI; }
       static void setRenderAPI(RenderAPI api);
+
+      virtual void onImGUI() {}
 
       static GraphicsContext *create();
 

@@ -4,6 +4,9 @@ namespace Ore
 {
   namespace Graphics
   {
+    /**
+     * Base class for different Grahphics libraries.
+     */
     class Renderer
     {
     public:

@@ -2,7 +2,7 @@
 #include "ore/engine/core/input.hpp"
 #include "ore/engine/core/node_factory.hpp"
 #include "ore/engine/core/scene_loader.hpp"
-#include "ore/engine/core/window.hpp"
+#include "ore/engine/os/window.hpp"
 #include "ore/engine/events/event.hpp"
 #include "ore/engine/events/key.hpp"
 #include "ore/engine/events/mouse.hpp"

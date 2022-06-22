@@ -4,10 +4,14 @@ namespace Ore
 {
   namespace Graphics
   {
-    class GLContext : public GraphicsContext
+    class OpenGLContext : public GraphicsContext
     {
     public:
+      ~OpenGLContext();
+
       static void makeDefault();
+
+      void onImGUI() override;
 
     protected:
       static GraphicsContext *createFunctionGL();

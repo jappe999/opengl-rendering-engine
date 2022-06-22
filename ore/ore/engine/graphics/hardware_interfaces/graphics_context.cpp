@@ -5,6 +5,10 @@ namespace Ore
 {
   namespace Graphics
   {
+    GraphicsContext *(*GraphicsContext::createFunction)() = nullptr;
+
+    RenderAPI GraphicsContext::s_renderAPI = RenderAPI::None;
+
     void GraphicsContext::setRenderAPI(RenderAPI api)
     {
       s_renderAPI = api;

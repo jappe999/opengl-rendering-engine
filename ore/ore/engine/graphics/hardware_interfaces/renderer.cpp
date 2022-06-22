@@ -4,6 +4,10 @@ namespace Ore
 {
   namespace Graphics
   {
+    Renderer *(*Renderer::createFunction)() = nullptr;
+
+    Renderer *Renderer::s_instance;
+
     void Renderer::init()
     {
       s_instance = createFunction();

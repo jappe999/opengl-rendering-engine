@@ -1,15 +1,16 @@
 #pragma once
 
-#include "ore/engine/graphics/hardware_interfaces/render_api.hpp"
-
 namespace Ore
 {
   namespace Graphics
   {
+    /**
+     * Base class for rendering objects.
+     */
     class IRenderer
     {
     public:
-      virtual ~IRenderer();
+      virtual ~IRenderer() = default;
 
       virtual void init() = 0;
       virtual void beginScene() = 0;
