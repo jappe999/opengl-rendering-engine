@@ -7,7 +7,8 @@ namespace Ore
     class ImGuiRenderer
     {
     public:
-      virtual void render();
+      ImGuiRenderer() {}
+      virtual void render() = 0;
 
     protected:
       static ImGuiRenderer *(*createFunc)(uint32_t, uint32_t, bool);
