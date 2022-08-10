@@ -9,18 +9,13 @@ namespace Rock
   public:
     Editor()
     {
-      ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;
       initComponents();
     }
 
     void onImGUI() override;
 
   private:
-    void initComponents()
-    {
-      SceneManager *sceneManager = new SceneManager();
-      sceneManager->name = "Scene manager";
-      addChild(sceneManager);
-    }
+    void initComponents();
+    void startDock();
   };
 } // namespace Rock
