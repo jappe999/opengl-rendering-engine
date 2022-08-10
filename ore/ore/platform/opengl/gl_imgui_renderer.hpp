@@ -22,6 +22,8 @@ namespace Ore
 
     private:
       bool onWindowResize(Events::WindowResizeEvent &event);
+
+      bool m_clearScreen;
     };
   } // namespace Graphics
 } // namespace Ore

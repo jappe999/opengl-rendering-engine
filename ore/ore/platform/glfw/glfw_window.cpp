@@ -58,6 +58,9 @@ namespace Ore
 
       Events::WindowResizeEvent event(width, height);
       data.eventCallback(event);
+
+      // Fix up the viewport to maintain aspect ratio.
+      glViewport(0, 0, width, height);
     };
 
 #ifdef __APPLE__

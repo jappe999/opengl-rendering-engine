@@ -111,9 +111,6 @@ namespace Ore
 
   bool Application::onWindowResize(Events::WindowResizeEvent &event)
   {
-    // Fix up the viewport to maintain aspect ratio.
-    glViewport(0, 0, event.getWidth(), event.getHeight());
-
     render();
 
     return true;
@@ -137,7 +134,6 @@ namespace Ore
 
   void Application::render()
   {
-    glClearColor(0, 0, 0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     float time = (float)glfwGetTime();

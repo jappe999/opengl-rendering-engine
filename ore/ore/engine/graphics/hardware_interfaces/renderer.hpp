@@ -5,7 +5,7 @@ namespace Ore
   namespace Graphics
   {
     /**
-     * Base class for different Grahphics libraries.
+     * Base class for different Graphics libraries.
      */
     class Renderer
     {
