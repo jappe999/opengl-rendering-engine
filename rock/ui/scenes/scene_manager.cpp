@@ -8,7 +8,7 @@ namespace Rock
 {
   void SceneManager::onImGUI()
   {
-    ImGui::Begin("Hello, world!");
+    if (ImGui::Begin("Hello, world!")){
 
     if (currentScene != "empty-void-with-cube" && ImGui::Button("Open cube scene"))
     {
@@ -21,6 +21,6 @@ namespace Rock
       currentScene = "empty";
     }
 
-    ImGui::End();
+    ImGui::End();}
   }
 } // namespace Rock

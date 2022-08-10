@@ -1,6 +1,5 @@
 #include "ore/engine/core/application.hpp"
 #include "ore/engine/core/scene_loader.hpp"
-#include "ore/platform/opengl/gl.hpp"
 #include "ore/engine/graphics/hardware_interfaces/graphics_context.hpp"
 #include "ore/engine/graphics/renderers/render_graph.hpp"
 #include "ore/engine/core/input.hpp"
