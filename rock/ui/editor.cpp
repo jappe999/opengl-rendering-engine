@@ -1,14 +1,10 @@
 #include "editor.hpp"
+#include "imgui_internal.h"
 
 namespace Rock
 {
   void Editor::onImGUI()
   {
-    // Render top bar.
-    if (ImGui::BeginMainMenuBar()) {
-      ImGui::EndMainMenuBar();
-    }
-
     startDock();
 
     // Render all decendants.
@@ -17,6 +13,8 @@ namespace Rock
 
   void Editor::initComponents()
   {
+    ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+
     SceneManager *sceneManager = new SceneManager();
     sceneManager->name = "Scene manager";
     addChild(sceneManager);
@@ -49,7 +47,7 @@ namespace Rock
     // We cannot preserve the docking relationship between an active window and an inactive docking, otherwise
     // any change of dockspace/settings would lead to windows being stuck in limbo and never being visible.
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-    ImGui::Begin(name.c_str(), nullptr, window_flags);
+    ImGui::Begin("Rock", nullptr, window_flags);
     ImGui::PopStyleVar();
     ImGui::PopStyleVar(2);
 
@@ -58,7 +56,7 @@ namespace Rock
 
     if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
     {
-      ImGuiID dockspace_id = ImGui::GetID(name.c_str());
+      ImGuiID dockspace_id = ImGui::GetID("Docking");
       ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
 
       static bool first_time = true;

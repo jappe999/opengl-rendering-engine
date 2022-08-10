@@ -8,19 +8,20 @@ namespace Rock
 {
   void SceneManager::onImGUI()
   {
-    if (ImGui::Begin("Hello, world!")){
-
-    if (currentScene != "empty-void-with-cube" && ImGui::Button("Open cube scene"))
+    if (ImGui::Begin("Scene Manager"))
     {
-      Ore::Application::getInstance().loadScene("assets/scenes/empty-void-with-cube.yml");
-      currentScene = "empty-void-with-cube";
-    }
-    else if (currentScene != "empty" && ImGui::Button("Open empty scene"))
-    {
-      Ore::Application::getInstance().loadScene("assets/scenes/empty.yml");
-      currentScene = "empty";
+      if (currentScene != "empty-void-with-cube" && ImGui::Button("Open cube scene"))
+      {
+        Ore::Application::getInstance().loadScene("assets/scenes/empty-void-with-cube.yml");
+        currentScene = "empty-void-with-cube";
+      }
+      else if (currentScene != "empty" && ImGui::Button("Open empty scene"))
+      {
+        Ore::Application::getInstance().loadScene("assets/scenes/empty.yml");
+        currentScene = "empty";
+      }
     }
 
-    ImGui::End();}
+    ImGui::End();
   }
 } // namespace Rock
