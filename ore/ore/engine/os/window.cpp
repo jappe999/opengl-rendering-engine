@@ -26,19 +26,13 @@ namespace Ore
     data.eventCallback = callback;
   }
 
-  void Window::setupImGui()
+  int32_t Window::getHeight()
   {
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    // ImGuiIO &io = ImGui::GetIO();
-    // (void)io;
-
-    ImGui_ImplOpenGL3_Init("#version 330");
+    return data.height;
   }
 
-  void Window::closeImGui()
+  int32_t Window::getWidth()
   {
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui::DestroyContext();
+    return data.width;
   }
 } // namespace Ore

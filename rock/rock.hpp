@@ -1,6 +1,6 @@
 #include <iostream>
 #include <ore/engine.hpp>
-#include "ui/scenes/scene_manager.hpp"
+#include "ui/editor.hpp"
 
 namespace Rock
 {
@@ -12,9 +12,8 @@ namespace Rock
     void onStart() override
     {
       loadScene("assets/scenes/empty.yml");
-      SceneManager *sceneManager = new SceneManager();
-      sceneManager->name = "Scene manager";
-      addNode(sceneManager);
+      Editor *editor = new Editor();
+      addNode(editor);
       cout << "Starting Rock editor!" << endl;
     }
 

@@ -6,7 +6,7 @@ namespace Rock
   class SceneManager : public Ore::Node
   {
   public:
-    void onUpdate() override;
+    void onImGUI() override;
 
   private:
     std::string currentScene = "empty";

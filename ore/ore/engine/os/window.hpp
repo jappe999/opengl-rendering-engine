@@ -23,8 +23,9 @@ namespace Ore
 
     virtual bool createContext() { return false; }
     virtual void setEventCallback(const EventCallback &callback);
-    virtual void setupImGui();
-    virtual void closeImGui();
+
+    int32_t getHeight();
+    int32_t getWidth();
 
   protected:
     struct WindowData

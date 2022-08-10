@@ -27,6 +27,11 @@ namespace Ore
     virtual void onUpdate();
 
     /**
+     * @brief Callback for frame update.
+     */
+    virtual void onImGUI();
+
+    /**
      * @brief Callback for event.
      *
      * @param event The triggered event.

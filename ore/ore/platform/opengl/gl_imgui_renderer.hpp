@@ -12,10 +12,14 @@ namespace Ore
 
       static void makeDefault();
 
-      void render() override;
+      void render(Camera *camera) override;
+      void onEvent(Events::Event &event) override;
 
     protected:
       static ImGuiRenderer *createFuncGL(uint32_t, uint32_t, bool);
+
+    private:
+      bool onWindowResize(Events::WindowResizeEvent &event);
     };
   } // namespace Graphics
 } // namespace Ore

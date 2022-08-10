@@ -133,6 +133,9 @@ namespace Ore
       node->onUpdate();
 
     for (auto node : nodes)
+      node->onImGUI();
+
+    for (auto node : nodes)
       node->render(camera);
 
     glfwSwapBuffers(window->getNative());

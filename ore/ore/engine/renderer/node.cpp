@@ -22,6 +22,12 @@ namespace Ore
       child->onUpdate();
   }
 
+  void Node::onImGUI()
+  {
+    for (auto child : children)
+      child->onImGUI();
+  }
+
   void Node::onEvent(Events::Event &event)
   {
     for (auto child : children)

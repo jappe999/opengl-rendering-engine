@@ -6,7 +6,7 @@
 
 namespace Rock
 {
-  void SceneManager::onUpdate()
+  void SceneManager::onImGUI()
   {
     ImGui::Begin("Hello, world!");
 
