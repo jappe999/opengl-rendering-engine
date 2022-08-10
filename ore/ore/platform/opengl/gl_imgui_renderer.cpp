@@ -1,6 +1,7 @@
 #include "gl_imgui_renderer.hpp"
 #include "ore/engine/events/window.hpp"
 #include "imgui_impl_opengl3.h"
+#include "imgui_impl_glfw.h"
 
 namespace Ore
 {
@@ -9,7 +10,6 @@ namespace Ore
     OpenGLImGuiRenderer::OpenGLImGuiRenderer(uint32_t width, uint32_t height, bool clearScreen)
     {
       ImGui_ImplOpenGL3_Init("#version 410");
-      ImGui_ImplOpenGL3_NewFrame();
     }
 
     OpenGLImGuiRenderer::~OpenGLImGuiRenderer()
@@ -20,6 +20,13 @@ namespace Ore
     void OpenGLImGuiRenderer::makeDefault()
     {
       createFunc = createFuncGL;
+    }
+
+    void OpenGLImGuiRenderer::newFrame()
+    {
+      ImGui_ImplOpenGL3_NewFrame();
+      ImGui_ImplGlfw_NewFrame();
+      ImGui::NewFrame();
     }
 
     void OpenGLImGuiRenderer::render(Camera *camera)
@@ -41,6 +48,7 @@ namespace Ore
 
     bool OpenGLImGuiRenderer::onWindowResize(Events::WindowResizeEvent &event)
     {
+      newFrame();
       return true;
     }
   } // namespace Graphics

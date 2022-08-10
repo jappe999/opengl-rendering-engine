@@ -2,6 +2,7 @@
 #include "ore/engine/core/scene_loader.hpp"
 #include "ore/platform/opengl/gl.hpp"
 #include "ore/engine/graphics/hardware_interfaces/graphics_context.hpp"
+#include "ore/engine/graphics/renderers/render_graph.hpp"
 #include "ore/engine/core/input.hpp"
 
 namespace Ore
@@ -52,13 +53,15 @@ namespace Ore
       return false;
 
     window->setEventCallback(RE_BIND_EVENT_FN(Application::onEvent));
-    window->setupImGui();
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
     glEnable(GL_BLEND);
     glEnable(GL_MULTISAMPLE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    m_imGuiManager = new ImGuiManager();
+    m_renderGraph = new Graphics::RenderGraph(window->getWidth(), window->getHeight());
 
     return true;
   }
@@ -71,6 +74,8 @@ namespace Ore
 
     hasStarted = true;
 
+    m_imGuiManager->onStart();
+    window->setupImGui();
     onStart();
 
     for (auto node : nodes)
@@ -79,35 +84,32 @@ namespace Ore
     glfwSwapInterval(1);
 
     /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window->getNative()))
+    while (onFrame())
     {
-      /* Poll for and process events */
-      glfwPollEvents();
-
-      render();
     }
 
     destroy();
-
-    glfwTerminate();
   }
 
   void Application::destroy()
   {
-    window->closeImGui();
     unloadCurrentScene();
+    // Close ImGUI
+    // Close other systems
     onDestroy();
   }
 
   void Application::onEvent(Events::Event &event)
   {
-    Events::EventDispatcher dispatcher(event);
-    dispatcher.dispatch<Events::WindowResizeEvent>(RE_BIND_EVENT_FN(onWindowResize));
-
     Input::get()->onEvent(event);
+    m_imGuiManager->onEvent(event);
 
     for (auto node : nodes)
       node->onEvent(event);
+
+    Events::EventDispatcher dispatcher(event);
+    dispatcher.dispatch<Events::WindowResizeEvent>(RE_BIND_EVENT_FN(onWindowResize));
+    dispatcher.dispatch<Events::WindowCloseEvent>(RE_BIND_EVENT_FN(onWindowClose));
   }
 
   bool Application::onWindowResize(Events::WindowResizeEvent &event)
@@ -118,6 +120,23 @@ namespace Ore
     render();
 
     return true;
+  }
+
+  bool Application::onWindowClose(Events::WindowCloseEvent &event)
+  {
+    m_appState = AppState::Closing;
+    return true;
+  }
+
+  bool Application::onFrame()
+  {
+    /* Poll for and process events */
+    glfwPollEvents();
+
+    m_imGuiManager->onUpdate();
+    render();
+
+    return m_appState != AppState::Closing;
   }
 
   void Application::render()
@@ -138,6 +157,7 @@ namespace Ore
     for (auto node : nodes)
       node->render(camera);
 
-    glfwSwapBuffers(window->getNative());
+    m_imGuiManager->render(camera);
+    window->onUpdate();
   }
 } // namespace Ore

@@ -3,10 +3,6 @@
 #include <iostream>
 #include <string>
 #include <functional>
-#include <GLFW/glfw3.h>
-
-#include "imgui.h"
-#include "imgui_impl_opengl3.h"
 
 #include "ore/engine/events/event.hpp"
 
@@ -19,13 +15,20 @@ namespace Ore
 
     static Window *create(std::string title, int32_t width, int32_t height);
 
-    GLFWwindow *getNative() { return window; }
-
     virtual bool createContext() { return false; }
+    virtual void setupImGui() {}
     virtual void setEventCallback(const EventCallback &callback);
+    virtual void processInput() {}
+    virtual void onUpdate() {}
 
-    int32_t getHeight();
-    int32_t getWidth();
+    inline int32_t getHeight() const
+    {
+      return data.height;
+    }
+    inline int32_t getWidth() const
+    {
+      return data.width;
+    }
 
   protected:
     struct WindowData
@@ -40,8 +43,6 @@ namespace Ore
 
     WindowData data;
     friend class Application;
-
-    GLFWwindow *window;
 
     static Window *(*createFunc)(std::string title, int32_t width, int32_t height);
   };

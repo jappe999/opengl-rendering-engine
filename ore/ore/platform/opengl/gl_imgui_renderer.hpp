@@ -1,4 +1,5 @@
 #include "ore/engine/graphics/hardware_interfaces/imgui_renderer.hpp"
+#include "ore/engine/events/window.hpp"
 
 namespace Ore
 {
@@ -12,6 +13,7 @@ namespace Ore
 
       static void makeDefault();
 
+      void newFrame() override;
       void render(Camera *camera) override;
       void onEvent(Events::Event &event) override;
 

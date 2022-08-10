@@ -28,4 +28,17 @@ namespace Ore::Events
   private:
     int32_t width, height;
   };
+
+  class WindowCloseEvent : public Event
+  {
+  public:
+    WindowCloseEvent() {}
+
+    std::string toString() const override
+    {
+      return "WindowCloseEvent";
+    }
+
+    EVENT_CLASS_TYPE(WindowClose);
+  };
 } // namespace Ore::Events

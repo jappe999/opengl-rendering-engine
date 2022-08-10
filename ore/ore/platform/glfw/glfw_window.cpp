@@ -1,4 +1,5 @@
 #include "./glfw_window.hpp"
+#include "imgui_impl_glfw.h"
 
 #include "ore/engine/events/event.hpp"
 #include "ore/engine/events/key.hpp"
@@ -9,6 +10,8 @@ namespace Ore
 {
   GLFWWindow::~GLFWWindow()
   {
+    glfwDestroyWindow(window);
+    glfwTerminate();
   }
 
   bool GLFWWindow::createContext()
@@ -61,6 +64,16 @@ namespace Ore
 #else
     glfwSetWindowSizeCallback(window, windowResizeCallback);
 #endif
+
+    glfwSetWindowCloseCallback(
+      window,
+      [](GLFWwindow* window)
+      {
+        WindowData data = *(WindowData *)glfwGetWindowUserPointer(window);
+
+        Events::WindowCloseEvent event;
+        data.eventCallback(event);
+      });
 
     glfwSetCursorPosCallback(
         window,
@@ -137,6 +150,21 @@ namespace Ore
         });
 
     return true;
+  }
+
+  void GLFWWindow::setupImGui()
+  {
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+  }
+
+  void GLFWWindow::processInput()
+  {
+    glfwPollEvents();
+  }
+
+  void GLFWWindow::onUpdate()
+  {
+    glfwSwapBuffers(window);
   }
 
   void GLFWWindow::makeDefault()

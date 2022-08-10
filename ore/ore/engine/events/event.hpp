@@ -10,6 +10,7 @@ namespace Ore::Events
   enum EventType
   {
     WindowResize,
+    WindowClose,
     KeyPress,
     KeyRepeat,
     KeyRelease,

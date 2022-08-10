@@ -7,9 +7,17 @@
 #include "ore/platform/glfw/glfw_window.hpp"
 #include "ore/engine/events/window.hpp"
 #include "ore/engine/graphics/renderers/render_graph.hpp"
+#include "ore/engine/imgui/imgui_manager.hpp"
 
 namespace Ore
 {
+  enum class AppState
+  {
+    Running,
+    Loading,
+    Closing
+  };
+
   class Application
   {
   public:
@@ -21,7 +29,11 @@ namespace Ore
       instance = this;
       GLFWWindow::makeDefault();
     }
-    ~Application() {}
+    ~Application()
+    {
+      delete m_renderGraph;
+      delete m_imGuiManager;
+    }
 
     static Application &getInstance() { return *instance; }
     Window &getWindow() { return *window; }
@@ -56,9 +68,13 @@ namespace Ore
 
     void onEvent(Events::Event &event);
     bool onWindowResize(Events::WindowResizeEvent &event);
+    bool onWindowClose(Events::WindowCloseEvent &event);
+    bool onFrame();
     void render();
 
-    Ore::Graphics::RenderGraph *m_renderGraph;
+    Graphics::RenderGraph *m_renderGraph;
+    ImGuiManager *m_imGuiManager;
+    AppState m_appState;
 
     bool hasStarted = false;
 

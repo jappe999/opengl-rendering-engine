@@ -25,14 +25,4 @@ namespace Ore
   {
     data.eventCallback = callback;
   }
-
-  int32_t Window::getHeight()
-  {
-    return data.height;
-  }
-
-  int32_t Window::getWidth()
-  {
-    return data.width;
-  }
 } // namespace Ore
