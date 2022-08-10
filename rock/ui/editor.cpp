@@ -7,6 +7,22 @@ namespace Rock
   {
     startDock();
 
+    if (ImGui::BeginMainMenuBar())
+    {
+      if (ImGui::BeginMenu("File")) {
+        if (ImGui::MenuItem("Open")) {
+          // Open file
+        }
+        if (ImGui::MenuItem("Save")) {
+          // Save current file
+        }
+
+        ImGui::EndMenu();
+      }
+
+      ImGui::EndMainMenuBar();
+    }
+
     // Render all decendants.
     Node::onImGUI();
   }

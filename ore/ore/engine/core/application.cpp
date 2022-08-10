@@ -80,8 +80,6 @@ namespace Ore
     for (auto node : nodes)
       node->onStart();
 
-    glfwSwapInterval(1);
-
     /* Loop until the user closes the window */
     while (onFrame())
     {
@@ -129,8 +127,7 @@ namespace Ore
 
   bool Application::onFrame()
   {
-    /* Poll for and process events */
-    glfwPollEvents();
+    window->processInput();
 
     m_imGuiManager->onUpdate();
     render();

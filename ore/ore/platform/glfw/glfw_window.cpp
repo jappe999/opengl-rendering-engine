@@ -36,6 +36,7 @@ namespace Ore
 
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
+    glfwSwapInterval(1);
 
     glfwSetWindowUserPointer(window, &data);
 
