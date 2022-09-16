@@ -5,10 +5,12 @@ namespace Rock
 {
   void RenderGraph::onImGUI()
   {
-    if(ImGui::Begin("Render graph")){
+    if (ImGui::Begin("Render graph"))
+    {
 
-    // TODO
+      // TODO
 
-    ImGui::End();}
+      ImGui::End();
+    }
   }
 } // namespace Rock

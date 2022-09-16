@@ -9,6 +9,8 @@ namespace Ore
     class OpenGLRenderer : public Renderer
     {
     public:
+      void internalInit() override;
+      void onResize(Events::WindowResizeEvent &event) override;
       static void makeDefault();
 
     protected:

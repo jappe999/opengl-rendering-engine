@@ -58,9 +58,6 @@ namespace Ore
 
       Events::WindowResizeEvent event(width, height);
       data.eventCallback(event);
-
-      // Fix up the viewport to maintain aspect ratio.
-      glViewport(0, 0, width, height);
     };
 
 #ifdef __APPLE__
@@ -70,14 +67,14 @@ namespace Ore
 #endif
 
     glfwSetWindowCloseCallback(
-      window,
-      [](GLFWwindow* window)
-      {
-        WindowData data = *(WindowData *)glfwGetWindowUserPointer(window);
+        window,
+        [](GLFWwindow *window)
+        {
+          WindowData data = *(WindowData *)glfwGetWindowUserPointer(window);
 
-        Events::WindowCloseEvent event;
-        data.eventCallback(event);
-      });
+          Events::WindowCloseEvent event;
+          data.eventCallback(event);
+        });
 
     glfwSetCursorPosCallback(
         window,

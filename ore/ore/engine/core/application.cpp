@@ -60,6 +60,7 @@ namespace Ore
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     m_imGuiManager = new ImGuiManager();
+    Graphics::Renderer::init();
     m_renderGraph = new Graphics::RenderGraph(window->getWidth(), window->getHeight());
 
     return true;
@@ -111,6 +112,8 @@ namespace Ore
 
   bool Application::onWindowResize(Events::WindowResizeEvent &event)
   {
+    Graphics::Renderer::get()->onResize(event);
+
     render();
 
     return true;
@@ -140,15 +143,19 @@ namespace Ore
     deltaTime = time - lastFrameTime;
     lastFrameTime = time;
 
+    // Update state of nodes
     for (auto node : nodes)
       node->onUpdate();
 
+    // Update GUI for nodes
     for (auto node : nodes)
       node->onImGUI();
 
+    // Render nodes
     for (auto node : nodes)
       node->render(camera);
 
+    // Render GUI
     m_imGuiManager->render(camera);
     window->onUpdate();
   }

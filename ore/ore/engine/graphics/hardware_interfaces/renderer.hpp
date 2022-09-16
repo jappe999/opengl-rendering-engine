@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ore/engine/events/window.hpp"
+
 namespace Ore
 {
   namespace Graphics
@@ -10,11 +12,14 @@ namespace Ore
     class Renderer
     {
     public:
-      Renderer() = default;
+      Renderer() {}
       virtual ~Renderer() = default;
 
       static void init();
       static void release();
+      virtual void internalInit() = 0;
+
+      virtual void onResize(Events::WindowResizeEvent &event) = 0;
 
       inline static Renderer *get()
       {
@@ -23,7 +28,6 @@ namespace Ore
 
     protected:
       static Renderer *(*createFunction)();
-
       static Renderer *s_instance;
     };
   } // namespace Graphics

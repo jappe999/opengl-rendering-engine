@@ -11,6 +11,7 @@ namespace Ore
     void Renderer::init()
     {
       s_instance = createFunction();
+      s_instance->internalInit();
     }
 
     void Renderer::release()
