@@ -14,3 +14,4 @@
 #include "ore/engine/renderer/scene.hpp"
 #include "ore/engine/renderer/shader.hpp"
 #include "ore/engine/renderer/world_node.hpp"
+#include "ore/engine/scene/scene_manager.hpp"

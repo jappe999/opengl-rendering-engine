@@ -14,7 +14,7 @@ namespace Ore
       static void makeDefault();
 
       void newFrame() override;
-      void render(Camera *camera) override;
+      void render() override;
       void onEvent(Events::Event &event) override;
 
     protected:

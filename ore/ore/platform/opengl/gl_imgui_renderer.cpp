@@ -31,7 +31,7 @@ namespace Ore
       ImGui::NewFrame();
     }
 
-    void OpenGLImGuiRenderer::render(Camera *camera)
+    void OpenGLImGuiRenderer::render()
     {
       ImGui::Render();
 

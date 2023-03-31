@@ -10,6 +10,7 @@ namespace Ore
     {
     public:
       void internalInit() override;
+      void clear() override;
       void onResize(Events::WindowResizeEvent &event) override;
       static void makeDefault();
 

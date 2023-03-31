@@ -38,7 +38,7 @@ namespace Ore
      */
     virtual void onEvent(Events::Event &event);
 
-    virtual void render(Camera *camera);
+    virtual void render();
 
     template <typename T>
     bool isA() { return typeid(*this) == typeid(T); }

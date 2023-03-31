@@ -18,6 +18,7 @@ namespace Ore
       static void init();
       static void release();
       virtual void internalInit() = 0;
+      virtual void clear() = 0;
 
       virtual void onResize(Events::WindowResizeEvent &event) = 0;
 

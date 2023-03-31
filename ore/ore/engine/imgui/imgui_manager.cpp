@@ -34,8 +34,8 @@ namespace Ore
     m_imGuiRenderer->newFrame();
   }
 
-  void ImGuiManager::render(Camera *camera)
+  void ImGuiManager::render()
   {
-    m_imGuiRenderer->render(camera);
+    m_imGuiRenderer->render();
   }
 } // namespace Ore

@@ -19,7 +19,7 @@ namespace Ore
     virtual void useShader(Shader *shader);
 
     virtual void bind();
-    virtual void render(Camera *camera);
+    virtual void render();
 
   protected:
     GLuint vao;

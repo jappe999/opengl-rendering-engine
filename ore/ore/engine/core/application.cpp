@@ -1,5 +1,6 @@
 #include "ore/engine/core/application.hpp"
 #include "ore/engine/core/scene_loader.hpp"
+#include "ore/engine/scene/scene_manager.hpp"
 #include "ore/engine/graphics/hardware_interfaces/graphics_context.hpp"
 #include "ore/engine/graphics/renderers/render_graph.hpp"
 #include "ore/engine/core/input.hpp"
@@ -10,26 +11,10 @@ namespace Ore
 
   void Application::loadScene(std::string path)
   {
-    unloadCurrentScene();
-    scene = SceneLoader::deserialize(path);
+    Scene *scene = SceneManager::get().preloadScene(path);
     camera = scene->getMainCamera();
     camera->setAspectRatio((float)window->data.width / window->data.height);
-
-    addNode(scene);
-  }
-
-  void Application::unloadCurrentScene()
-  {
-    if (scene != nullptr)
-    {
-      removeNode(scene);
-
-      delete scene;
-      scene = nullptr;
-
-      // Camera is removed by the scene.
-      camera = nullptr;
-    }
+    SceneManager::get().switchScene();
   }
 
   void Application::addNode(Node *node)
@@ -91,7 +76,7 @@ namespace Ore
 
   void Application::destroy()
   {
-    unloadCurrentScene();
+    SceneManager::get().unloadCurrentScene();
     // Close ImGUI
     // Close other systems
     onDestroy();
@@ -137,26 +122,14 @@ namespace Ore
 
   void Application::render()
   {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    Graphics::Renderer::get()->clear();
 
     float time = (float)glfwGetTime();
     deltaTime = time - lastFrameTime;
     lastFrameTime = time;
 
-    // Update state of nodes
-    for (auto node : nodes)
-      node->onUpdate();
-
-    // Update GUI for nodes
-    for (auto node : nodes)
-      node->onImGUI();
-
-    // Render nodes
-    for (auto node : nodes)
-      node->render(camera);
-
     // Render GUI
-    m_imGuiManager->render(camera);
+    m_imGuiManager->render();
     window->onUpdate();
   }
 } // namespace Ore

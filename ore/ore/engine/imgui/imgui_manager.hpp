@@ -21,7 +21,7 @@ namespace Ore
     void onEvent(Events::Event &event) override;
 
     // Render ImGui frame.
-    void render(Camera *camera) override;
+    void render() override;
 
   private:
     Graphics::ImGuiRenderer *m_imGuiRenderer;

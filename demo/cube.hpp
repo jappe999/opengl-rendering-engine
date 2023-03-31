@@ -67,7 +67,7 @@ public:
 
   void render(Ore::Camera *camera)
   {
-    Ore::Renderable::render(camera);
+    Ore::Renderable::render();
 
     glBindVertexArray(vao);
     glDrawArrays(GL_TRIANGLES, 0, 36);

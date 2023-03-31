@@ -9,6 +9,11 @@ namespace Ore
     {
     }
 
+    void OpenGLRenderer::clear()
+    {
+      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    }
+
     void OpenGLRenderer::onResize(Events::WindowResizeEvent &event)
     {
       // Fix up the viewport to maintain aspect ratio.

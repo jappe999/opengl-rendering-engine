@@ -34,13 +34,13 @@ namespace Ore
       child->onEvent(event);
   }
 
-  void Node::render(Camera *camera)
+  void Node::render()
   {
     for (auto child : children)
     {
       // Validate that the child can be rendered.
       if (child->isDerivedFrom<Renderable>())
-        dynamic_cast<Renderable *>(child)->render(camera);
+        dynamic_cast<Renderable *>(child)->render();
     }
   }
 

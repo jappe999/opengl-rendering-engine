@@ -8,6 +8,7 @@
 #include "ore/engine/events/window.hpp"
 #include "ore/engine/graphics/renderers/render_graph.hpp"
 #include "ore/engine/imgui/imgui_manager.hpp"
+#include "ore/engine/scene/scene_manager.hpp"
 
 namespace Ore
 {
@@ -74,6 +75,7 @@ namespace Ore
 
     Graphics::RenderGraph *m_renderGraph;
     ImGuiManager *m_imGuiManager;
+    SceneManager *m_sceneManager;
     AppState m_appState;
 
     bool hasStarted = false;
